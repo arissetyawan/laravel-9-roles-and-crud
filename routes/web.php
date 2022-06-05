@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::controller(RoleController::class)->prefix("role")->group(function (){
+
+Route::get('/', 'index');
+
+Route::get('/create', 'create')->name('role/create');
+
+Route::post('/store', 'store')->name('role/store');
+
+});
+
+
 
 Auth::routes();
 
