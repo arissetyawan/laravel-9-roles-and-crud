@@ -17,24 +17,15 @@
     <form method="POST" action="{{ Route('role/store') }}">
         @csrf
         <div class="form-group">
-          <label>Role name</label>
-          <input type="text" class="form-control" name="name" placeholder="Role name">
-            @error('name')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        
+          <label for="name">Role name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Role name">
         </div>
+
         <div class="form-group">
-          <label>Role description</label>
-          <input type="text" class="form-control" name="description"  placeholder="Role description">
-          @error('description')
-          <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-          </span>
-          @enderror
-        </div> 
+            <label for="description">Role description</label>
+            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 </div>

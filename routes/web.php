@@ -25,6 +25,10 @@ Route::get('/create', 'create')->name('role/create');
 
 Route::post('/store', 'store')->name('role/store');
 
+Route::get('/show', 'show')->name('role/show');
+
+Route::get('/destroy/{id}', 'destroy')->name('role/destroy')->where('id','[0-9]+');
+
 });
 
 

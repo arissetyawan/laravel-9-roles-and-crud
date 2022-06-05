@@ -20,7 +20,7 @@
         <th scope="row">{{ $role->id }}</th>
         <td>{{ $role->name }}</td>
         <td>{{ $role->description }}</td>
-        <td><a class="btn btn-primary">Edit</a><a class="btn btn-danger">delete</a></td>
+        <td><a class="btn btn-primary">Edit</a><a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger">delete</a></td>
       </tr>
   @endforeach
     </tbody>

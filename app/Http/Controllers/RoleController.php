@@ -85,11 +85,12 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
-    {
-        //
+    public function destroy($id)
+    { 
+        $this->roleRepository->deleteById($role);
+        return redirect()->back()->with('success','test dev');
     }
 }
