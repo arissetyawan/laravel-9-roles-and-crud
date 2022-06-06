@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/user/create', function () {
+    return view('dashboard.user.create');
+});
+
 Route::middleware('auth')->controller(RoleController::class)->prefix("role")->group(function (){
 
 Route::get('/', 'index');

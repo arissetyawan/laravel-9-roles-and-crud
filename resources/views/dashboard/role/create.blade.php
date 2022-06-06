@@ -15,7 +15,7 @@
         @csrf
         <div class="form-group">
           <label for="name">Role name</label>
-          <input type="text" class="form-control @error('email') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="Role name">
+          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="Role name">
         </div>
 
         <div class="form-group">
