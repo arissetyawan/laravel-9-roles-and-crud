@@ -2,7 +2,6 @@
 
 @section('content')
 
-<h1>role list</h1>
 <div class="container">
     <a href="{{ Route('role/create') }}" class="btn btn-primary">Add new role</a>
   <table class="table">
@@ -20,7 +19,7 @@
         <th scope="row">{{ $role->id }}</th>
         <td>{{ $role->name }}</td>
         <td>{{ $role->description }}</td>
-        <td><a class="btn btn-primary">Edit</a><a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger">delete</a></td>
+        <td><a href="{{ Route('role/edit',$role->id) }}" class="btn btn-primary">Edit</a><a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger">delete</a></td>
       </tr>
   @endforeach
     </tbody>
