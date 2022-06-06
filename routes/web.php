@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controller(RoleController::class)->prefix("role")->group(function (){
+Route::middleware('auth')->controller(RoleController::class)->prefix("role")->group(function (){
 
 Route::get('/', 'index');
 
@@ -25,7 +25,9 @@ Route::get('/create', 'create')->name('role/create');
 
 Route::post('/store', 'store')->name('role/store');
 
-Route::get('/show', 'show')->name('role/show');
+Route::get('/edit/{id}', 'edit')->name('role/edit')->where('id','[0-9]+');
+
+Route::post('/update', 'update')->name('role/update')->where('id','[0-9]+');
 
 Route::get('/destroy/{id}', 'destroy')->name('role/destroy')->where('id','[0-9]+');
 

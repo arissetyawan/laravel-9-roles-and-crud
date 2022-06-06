@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Repositories\Role\RoleRepository;
+use Alert;
+
+
 class RoleController extends Controller
 {
     public $roleRepository;
@@ -43,31 +45,22 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRoleRequest $request)
-    {
+    { 
         $this->roleRepository->create($request->all());
-        return redirect()->back()->with('success','test dev');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
-    {
-        //
-    }
+        toast('Your Role as been submited!','success');
+        return redirect()->back();
+    } 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        //
+        $role = $this->roleRepository->getById($id);
+        return view('dashboard.role.edit',compact('role'));
     }
 
     /**
@@ -77,9 +70,11 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(UpdateRoleRequest $request)
     {
-        //
+        $this->roleRepository->updateById($request->id,$request->except('id'));
+        toast('Your Role as been updatedt!','success');
+        return redirect('/role');
     }
 
     /**
@@ -90,7 +85,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     { 
-        $this->roleRepository->deleteById($role);
+        $this->roleRepository->deleteById($id);
         return redirect()->back()->with('success','test dev');
     }
 }
