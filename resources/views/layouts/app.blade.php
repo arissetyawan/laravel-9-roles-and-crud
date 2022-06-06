@@ -69,6 +69,7 @@
                                     </form>
                                 </div>
                             </li>
+                            @include('sweetalert::alert')
                         @endguest
                     </ul>
                 </div>
