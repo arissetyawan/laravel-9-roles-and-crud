@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,22 @@ Route::get('/', function () {
 
 Route::get('/user/create', function () {
     return view('dashboard.user.create');
+});
+
+Route::middleware('auth')->controller(UserController::class)->prefix('user')->group(function ()
+{
+    Route::get('/','index');
+    
+    Route::get('/create','create')->name('user/create');
+
+    Route::post('/store', 'store')->name('user/store');
+
+    Route::get('/edit/{id}', 'edit')->name('user/edit')->where('id','[0-9]+');
+
+    Route::post('/update', 'update')->name('user/update')->where('id','[0-9]+');
+
+    Route::get('/destroy/{id}', 'destroy')->name('user/destroy')->where('id','[0-9]+');
+
 });
 
 Route::middleware('auth')->controller(RoleController::class)->prefix("role")->group(function (){
