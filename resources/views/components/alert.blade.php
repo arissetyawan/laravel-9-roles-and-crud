@@ -1,3 +1,3 @@
-<div class="alert alert-{{ $type }}">
-{{ $message }}
-</div> 
+<span class="{{ $type }}">
+ <strong> {{ $message }} </strong>
+</span> 
