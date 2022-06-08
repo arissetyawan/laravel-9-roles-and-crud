@@ -28,11 +28,7 @@ Basic CRUD , AUTH system and Role mangment system Operation with Laravel 9 and b
 
 ## What's this repo about
 
-Simply, it's a basic create, read, update and delete operation with Laravel 9 and Bootstrap 4.
-
-```bash
-pip install foobar
-```
+Simply, it's a basic create, read, update and delete operation with Laravel 9 and Bootstrap 4. 
 
 ## Requirements
 
