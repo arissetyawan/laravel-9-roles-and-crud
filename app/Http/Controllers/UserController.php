@@ -53,8 +53,8 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     { 
-        $this->roleRepository->create($request->all());
-        toast('Your Role as been submited!','success');
+        $this->userRepository->create($request->all());
+        toast('Your User as been submited!','success');
         return redirect()->back();
     } 
 
@@ -66,8 +66,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $roles = $this->roleRepository->all();
         $user = $this->userRepository->getById($id);
-        return view('dashboard.user.edit',compact('user'));
+        return view('dashboard.user.edit',compact('user','roles'));
     }
 
     /**
