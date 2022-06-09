@@ -26,7 +26,7 @@
         <th scope="row">{{ $user->id }}</th>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
-        <td>Role</td>
+        <td>{{ $user->role->name }}</td>
         <td>
          <a href="{{ Route('user/edit',$user->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
          <a href="{{ Route('user/destroy',$user->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
