@@ -44,16 +44,21 @@ Just clone the project to anywhere in your computer.
 git clone https://github.com/halimhmairi/laravel-9-roles-and-crud.git
 ``` 
 
-Then do a composer install
+Then do a composer require laravel/ui
 
 ```bash
-composer install
+composer require laravel/ui
 ``` 
 
-Then create a environment file using this command-
+Then create a environment file using this command
+```bash
+php artisan key:generate
+``` 
+
 ```bash
 cp .env.example .env
 ``` 
+
 Then edit .env file with appropriate credential for your database server. Just edit these two parameter(```DB_USERNAME``` , ```DB_PASSWORD``` ).
 
 and
