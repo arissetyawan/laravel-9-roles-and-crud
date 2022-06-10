@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -35,6 +36,17 @@ Route::middleware('auth')->controller(UserController::class)->prefix('user')->gr
     Route::post('/update', 'update')->name('user/update')->where('id','[0-9]+');
 
     Route::get('/destroy/{id}', 'destroy')->name('user/destroy')->where('id','[0-9]+');
+
+
+});
+
+Route::middleware('auth')->controller(ProfileController::class)->prefix("profile")->group(function (){
+   
+    Route::get('/edit','edit')->name('profile/edit');
+
+    Route::post('/update','update')->name('profile/update');
+
+    Route::post('/updatePassword','updatePassword')->name('profile/updatePassword');
 
 });
 
