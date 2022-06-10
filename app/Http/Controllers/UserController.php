@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+ 
 use App\Repositories\user\UserRepository;
 use App\Http\Requests\user\StoreUserRequest;
 use App\Http\Requests\user\UpdateUserRequest;
@@ -55,7 +54,7 @@ class UserController extends Controller
     { 
         $this->userRepository->create($request->all());
         toast('Your User as been submited!','success');
-        return redirect()->back();
+        return redirect('/user');
     } 
 
     /**

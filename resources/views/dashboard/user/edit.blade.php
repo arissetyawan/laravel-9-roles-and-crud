@@ -18,7 +18,7 @@
                             <div class="col-md-6">
                                 <input id="name" type="text" value="{{ $user->name }}" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 
-                                <input id="id" type="hidden" value="{{ $user->id }}">
+                                <input name="id" type="hidden" value="{{ $user->id }}">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -52,20 +52,6 @@
                                     @endforeach
                                 </select>
                                 @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
