@@ -38,7 +38,7 @@ class UserController extends Controller
     public function index()
     {
         
-        $users = $this->userRepository->all();
+        $users = $this->userRepository->paginate(5,['*'],'page');;
         return view('dashboard.user.index', compact('users'));
     }
 

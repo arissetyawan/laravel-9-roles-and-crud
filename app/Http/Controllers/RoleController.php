@@ -32,7 +32,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = $this->roleRepository->all();
+        $roles = $this->roleRepository->paginate(5,['*'],'page');
         return view('dashboard.role.index',compact('roles'));
     }
 
