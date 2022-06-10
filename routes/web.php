@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,23 @@ Route::post('/update', 'update')->name('role/update')->where('id','[0-9]+');
 
 Route::get('/destroy/{id}', 'destroy')->name('role/destroy')->where('id','[0-9]+');
 
+});
+
+
+Route::middleware('auth')->controller(CategoryController::class)->prefix("category")->group(function (){
+
+    Route::get('/', 'index')->name('category');
+    
+    Route::get('/create', 'create')->name('category/create');
+    
+    Route::post('/store', 'store')->name('category/store');
+    
+    Route::get('/edit/{id}', 'edit')->name('category/edit')->where('id','[0-9]+');
+    
+    Route::post('/update', 'update')->name('category/update')->where('id','[0-9]+');
+    
+    Route::get('/destroy/{id}', 'destroy')->name('category/destroy')->where('id','[0-9]+');
+    
 });
 
 
