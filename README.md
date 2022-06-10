@@ -61,7 +61,7 @@ Simply, it's a basic create, read, update and delete operation with Laravel 9 an
 # Installation
 Just clone the project to anywhere in your computer.
 ```bash
-git clone https://github.com/ToTanbir/laravel-crud.git
+git clone https://github.com/halimhmairi/laravel-9-roles-and-crud.git
 ``` 
 
 Then do a composer install
@@ -74,7 +74,7 @@ Then create a environment file using this command-
 ```bash
 cp .env.example .env
 ``` 
-Then edit .env file with appropriate credential for your database server. Just edit these two parameter(```bash DB_USERNAME``` , ```bash DB_PASSWORD``` ).
+Then edit .env file with appropriate credential for your database server. Just edit these two parameter(```DB_USERNAME``` , ```DB_PASSWORD``` ).
 
 and
 
