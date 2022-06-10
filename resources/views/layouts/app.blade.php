@@ -58,7 +58,15 @@
                                 </a>
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                  
+                                @can('is_admin')
+                                    <a class="dropdown-item" href="{{ route('role') }}">
+                                        {{ __('Role Management') }}
+                                    </a>
+
+                                  <a class="dropdown-item" href="{{ route('user') }}">
+                                        {{ __('User Management') }}
+                                    </a>
+                                @endif
                                    <a class="dropdown-item" href="{{ route('profile/edit') }}">
                                         {{ __('Settings') }}
                                     </a>

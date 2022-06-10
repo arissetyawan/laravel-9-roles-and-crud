@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->controller(UserController::class)->prefix('user')->group(function ()
 {
-    Route::get('/','index');
+    Route::get('/','index')->name('user');
     
     Route::get('/create','create')->name('user/create');
 
@@ -48,7 +48,7 @@ Route::middleware('auth')->controller(ProfileController::class)->prefix("profile
 
 Route::middleware('auth')->controller(RoleController::class)->prefix("role")->group(function (){
 
-Route::get('/', 'index');
+Route::get('/', 'index')->name('role');
 
 Route::get('/create', 'create')->name('role/create');
 
