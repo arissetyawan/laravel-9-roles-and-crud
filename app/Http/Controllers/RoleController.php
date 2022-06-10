@@ -11,7 +11,7 @@ class RoleController extends Controller
 {
     public $roleRepository;
     private $user;
-    
+
     public function __construct(RoleRepository $roleRepository)
     {
         $this->roleRepository = $roleRepository;
@@ -19,7 +19,7 @@ class RoleController extends Controller
         $this->middleware(function ($request, $next) {
 
             $this->user = Auth::user();
-            $this->authorize('is_user',$this->user);
+            $this->authorize('is_admin',$this->user);
 
             return $next($request);
         });
