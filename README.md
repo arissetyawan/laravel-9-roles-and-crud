@@ -30,26 +30,58 @@ Basic CRUD , AUTH system and Role mangment system Operation with Laravel 9 and b
 
 Simply, it's a basic create, read, update and delete operation with Laravel 9 and Bootstrap 4. 
 
+## Features
+
+- Role management (list,create,delete,edit)
+
+- User management (list,create,delete,edit)
+
+- Account settings 
+
+## Tech
+
+- BOOTSRAP 4
+
+- LARAVEL 9
+
+- PHP8
+
+
 ## Requirements
 
-PHP >= 8.0.0
+- PHP >= 8.0.0
 
-PDO PHP Extension
+- PDO PHP Extension
 
-Mbstring PHP Extension
+- Mysql 
 
-Tokenizer PHP Extension
+- Composer >= 2.2.3
 
-XML PHP Extension
 
 # Installation
-Just clone the project to anywhere in your computer. Run 
+Just clone the project to anywhere in your computer.
+```bash
+git clone https://github.com/ToTanbir/laravel-crud.git
+``` 
+
+Then do a composer install
 
 ```bash
 composer install
 ``` 
-and
+
+Then create a environment file using this command-
 ```bash
+cp .env.example .env
+``` 
+Then edit .env file with appropriate credential for your database server. Just edit these two parameter(```bash DB_USERNAME``` , ```bash DB_PASSWORD``` ).
+
+and
+
+```bash
+php artisan db:seed 
+``` 
+```bash 
 php artisan migrate
 ``` 
 Now you are done.
