@@ -6,22 +6,33 @@ use App\Repositories\user\UserRepository;
 use App\Http\Requests\user\StoreUserRequest;
 use App\Http\Requests\user\UpdateUserRequest;
 use App\Repositories\Role\RoleRepository;
+use Illuminate\Support\Facades\Auth; 
 
 class UserController extends Controller
 {
     public $userRepository;
     public $roleRepository;
-
+    private $user;
     public function __construct(UserRepository $userRepository,RoleRepository $roleRepository)
     {
         $this->userRepository =  $userRepository;
         $this->roleRepository = $roleRepository;
+
+        $this->middleware(function ($request, $next) {
+
+            $this->user = Auth::user();
+            $this->authorize('is_admin',$this->user);
+
+            return $next($request);
+        });
+ 
+       
+       
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of the resource.
      *
-     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -32,9 +43,8 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new resource.
      *
-     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create()

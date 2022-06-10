@@ -4,17 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Repositories\Role\RoleRepository;
-use Alert;
-
+use App\Repositories\Role\RoleRepository; 
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
     public $roleRepository;
-
+    private $user;
+    
     public function __construct(RoleRepository $roleRepository)
     {
         $this->roleRepository = $roleRepository;
+
+        $this->middleware(function ($request, $next) {
+
+            $this->user = Auth::user();
+            $this->authorize('is_user',$this->user);
+
+            return $next($request);
+        });
     }
 
     /**

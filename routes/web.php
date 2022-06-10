@@ -19,10 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/create', function () {
-    return view('dashboard.user.create');
-});
-
 Route::middleware('auth')->controller(UserController::class)->prefix('user')->group(function ()
 {
     Route::get('/','index');
