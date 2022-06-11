@@ -1,12 +1,12 @@
 
 # laravel 9 CRUD , Role (repository pattern)
 
-Basic CRUD , AUTH system and Role mangment system Operation with Laravel 9 and bootstrap 4
+Basic CRUD , AUTH system and Role mangment system Operation with Laravel 9 and bootstrap 5
 
 
 ## What's this repo about
 
-Simply, it's a basic create, read, update and delete operation with Laravel 9 and Bootstrap 4. 
+Simply, it's a basic create, read, update and delete operation with Laravel 9 and Bootstrap 5. 
 
 ## Features
 
@@ -20,7 +20,7 @@ Simply, it's a basic create, read, update and delete operation with Laravel 9 an
 
 ## Tech
 
-- BOOTSRAP 4
+- BOOTSRAP 5
 
 - LARAVEL 9
 
