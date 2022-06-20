@@ -3,8 +3,6 @@
 
 Basic CRUD , AUTH system and Role mangment system Operation with Laravel 9 and bootstrap 5
 
-![image](https://user-images.githubusercontent.com/26728107/174671637-d92b2c95-2e85-40e6-b11e-0ed242eb6022.png)
-
 
 ## What's this repo about
 
