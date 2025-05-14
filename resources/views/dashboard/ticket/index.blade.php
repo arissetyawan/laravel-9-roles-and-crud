@@ -14,7 +14,8 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="col-8">Name</th>
+                        <th scope="col" class="col-8">Description</th>
+                        <th scope="col" class="col-2">Category</th>
                         <th scope="col" class="col-2">Action</th>
                     </tr>
                     </thead>
@@ -23,6 +24,7 @@
                     <tr>
                         <th scope="row">{{ $ticket->id }}</th>
                         <td>{{ $ticket->description }}</td>
+                        <td>{{ $ticket->category->name }}</td>
                         <td>
                         <a href="{{ Route('ticket/edit',$ticket->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         <a href="{{ Route('ticket/destroy',$ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>

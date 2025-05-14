@@ -24,7 +24,8 @@ class UpdateTicketRequest extends FormRequest
     public function rules()
     {
         return [
-            "description" => "required"
+            "description" => "required",
+            'category_id' => 'required'
         ];
     }
 }

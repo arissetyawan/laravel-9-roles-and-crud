@@ -71,8 +71,9 @@ class TicketController extends Controller
      */
     public function edit($id)
     {
+        $categories = $this->categoryRepository->all();
         $ticket = $this->ticketRepository->getById($id);
-        return view('dashboard.ticket.edit',compact('ticket'));
+        return view('dashboard.ticket.edit',compact('ticket','categories'));
     }
 
     /**
