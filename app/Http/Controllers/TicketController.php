@@ -2,11 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
-use Illuminate\Http\Request;
+use App\Http\Requests\Ticket\StoreTicketRequest;
+use App\Http\Requests\Ticket\UpdateTicketRequest;
+use App\Repositories\Ticket\TicketRepository;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
+
+    public $ticketRepository;
+
+    public function __construct(TicketRepository $ticketRepository)
+    {
+        $this->ticketRepository =  $ticketRepository;
+
+        $this->middleware(function ($request, $next) {
+
+            $this->user = Auth::user();
+            $this->authorize('is_user',$this->user);
+
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +32,9 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = $this->ticketRepository->paginate(5,['*'],'page');
+
+        return view('dashboard.ticket.index',compact('tickets'));
     }
 
     /**
@@ -24,62 +44,58 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.ticket.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreticketRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreticketRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ticket $ticket)
-    {
-        //
+        $this->ticketRepository->create($request->all());
+        toast('Your ticket as been submited!','success');
+        return redirect('ticket');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ticket $ticket)
+    public function edit($id)
     {
-        //
+        $ticket = $this->ticketRepository->getById($id);
+        return view('dashboard.ticket.edit',compact('ticket'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Http\Requests\UpdateticketRequest
+     * @param  \App\Models\ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(UpdateticketRequest $request)
     {
-        //
+        $this->ticketRepository->updateById($request->id,$request->except('id'));
+        toast('Your ticket as been updated!','success');
+        return redirect('/ticket');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ticket $ticket)
+    public function destroy($id)
     {
-        //
+        $this->ticketRepository->deleteById($id);
+        toast('Your ticket as been deleted!','success');
+        return redirect()->back();
     }
 }

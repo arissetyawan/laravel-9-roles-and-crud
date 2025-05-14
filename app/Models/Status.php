@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class Status extends Model
 {
     use HasFactory;
 
@@ -14,15 +14,6 @@ class Ticket extends Model
      *
      * @var array
      */
-    protected $fillable = ['status_id','description'];
+    protected $fillable = ['name'];
 
-
-    /**
-     * Get the user.
-     *
-     */
-    public function user()
-    {
-        return $this->hasMany(User::class);
-    }
 }

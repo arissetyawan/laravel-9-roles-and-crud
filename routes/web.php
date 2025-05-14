@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TicketController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,6 +96,22 @@ Route::middleware('auth')->controller(PriorityController::class)->prefix("priori
     Route::post('/update', 'update')->name('priority/update')->where('id','[0-9]+');
 
     Route::get('/destroy/{id}', 'destroy')->name('priority/destroy')->where('id','[0-9]+');
+
+});
+
+Route::middleware('auth')->controller(TicketController::class)->prefix("ticket")->group(function (){
+
+    Route::get('/', 'index')->name('ticket');
+
+    Route::get('/create', 'create')->name('ticket/create');
+
+    Route::post('/store', 'store')->name('ticket/store');
+
+    Route::get('/edit/{id}', 'edit')->name('ticket/edit')->where('id','[0-9]+');
+
+    Route::post('/update', 'update')->name('ticket/update')->where('id','[0-9]+');
+
+    Route::get('/destroy/{id}', 'destroy')->name('ticket/destroy')->where('id','[0-9]+');
 
 });
 
