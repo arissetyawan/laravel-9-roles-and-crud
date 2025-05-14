@@ -13,12 +13,25 @@
         @csrf
         <div class="form-group">
           <label for="description">description</label>
-          <input type="text" class="form-control @error('description') is-invalid @enderror" description="description" id="description" value="{{ old('description') }}" placeholder="ticket description">
+          <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="3">{{ old('description') }}</textarea>
           @error('description')
           <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
           @enderror
         </div>
-
+        <br />
+        <div class="form-group">
+          <label for="description">category</label>
+          <select name="category_id"  id="category_id" class="form-control @error('category') is-invalid @enderror">
+              @foreach($categories as $category)
+              <option value="{{ $category->id }}">{{ $category->name }} </option>
+              @endforeach
+          </select>
+          @error('category')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
         </div>

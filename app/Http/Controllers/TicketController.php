@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Repositories\Ticket\TicketRepository;
+use App\Repositories\Category\CategoryRepository;
 use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
@@ -12,9 +13,10 @@ class TicketController extends Controller
 
     public $ticketRepository;
 
-    public function __construct(TicketRepository $ticketRepository)
+    public function __construct(TicketRepository $ticketRepository, CategoryRepository $categoryRepository)
     {
         $this->ticketRepository =  $ticketRepository;
+        $this->categoryRepository = $categoryRepository;
 
         $this->middleware(function ($request, $next) {
 
@@ -44,7 +46,8 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('dashboard.ticket.create');
+        $categories = $this->categoryRepository->all();
+        return view('dashboard.ticket.create',compact('categories'));
     }
 
     /**

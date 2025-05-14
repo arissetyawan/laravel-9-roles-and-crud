@@ -22,7 +22,7 @@
                     @foreach($tickets as $ticket)
                     <tr>
                         <th scope="row">{{ $ticket->id }}</th>
-                        <td>{{ $ticket->name }}</td>
+                        <td>{{ $ticket->description }}</td>
                         <td>
                         <a href="{{ Route('ticket/edit',$ticket->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         <a href="{{ Route('ticket/destroy',$ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>

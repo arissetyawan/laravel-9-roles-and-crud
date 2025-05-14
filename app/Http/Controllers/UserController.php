@@ -13,7 +13,7 @@ class UserController extends Controller
     public $userRepository;
     public $roleRepository;
     private $user;
-    public function __construct(UserRepository $userRepository,RoleRepository $roleRepository)
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
     {
         $this->userRepository =  $userRepository;
         $this->roleRepository = $roleRepository;
