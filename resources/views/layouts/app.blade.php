@@ -64,6 +64,11 @@
                                     </a>
                                 @endif
 
+                                @can('is_admin')                                    <a class="dropdown-item" href="{{ route('priority') }}">
+                                        {{ __('Priorities Management') }}
+                                    </a>
+                                @endif
+
                                 @can('is_admin')
                                     <a class="dropdown-item" href="{{ route('role') }}">
                                         {{ __('Role Management') }}

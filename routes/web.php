@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,21 @@ Route::middleware('auth')->controller(CategoryController::class)->prefix("catego
 });
 
 
+Route::middleware('auth')->controller(PriorityController::class)->prefix("priority")->group(function (){
+
+    Route::get('/', 'index')->name('priority');
+
+    Route::get('/create', 'create')->name('priority/create');
+
+    Route::post('/store', 'store')->name('priority/store');
+
+    Route::get('/edit/{id}', 'edit')->name('priority/edit')->where('id','[0-9]+');
+
+    Route::post('/update', 'update')->name('priority/update')->where('id','[0-9]+');
+
+    Route::get('/destroy/{id}', 'destroy')->name('priority/destroy')->where('id','[0-9]+');
+
+});
 
 Auth::routes();
 
