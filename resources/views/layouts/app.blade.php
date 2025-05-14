@@ -60,22 +60,22 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                 @can('is_admin')                                    <a class="dropdown-item" href="{{ route('category') }}">
-                                        {{ __('Category Management') }}
+                                        {{ __('Categories') }}
                                     </a>
                                 @endif
 
                                 @can('is_admin')                                    <a class="dropdown-item" href="{{ route('priority') }}">
-                                        {{ __('Priorities Management') }}
+                                        {{ __('Priorities') }}
                                     </a>
                                 @endif
 
                                 @can('is_admin')
                                     <a class="dropdown-item" href="{{ route('role') }}">
-                                        {{ __('Role Management') }}
+                                        {{ __('Roles') }}
                                     </a>
 
                                   <a class="dropdown-item" href="{{ route('user') }}">
-                                        {{ __('User Management') }}
+                                        {{ __('Users') }}
                                     </a>
                                 @endif
                                    <a class="dropdown-item" href="{{ route('profile/edit') }}">

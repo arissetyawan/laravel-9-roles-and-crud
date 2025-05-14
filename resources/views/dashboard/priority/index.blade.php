@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('prioritys') }} <a href="{{ Route('priority/create') }}" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i></a></div>
+                <div class="card-header">{{ __('Priority') }} <a href="{{ Route('priority/create') }}" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i></a></div>
 
                 <div class="card-body">
                 <table class="table">
