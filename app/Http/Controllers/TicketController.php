@@ -58,9 +58,9 @@ class TicketController extends Controller
      */
     public function store(StoreticketRequest $request)
     {
-        $this->ticketRepository->create($request->all());
+        $ticket = $this->ticketRepository->create($request->all());
         toast('Your ticket as been submited!','success');
-        return redirect('ticket');
+        return redirect()->route('ticket/edit', ['id'=> $ticket->id]);
     }
 
     /**
