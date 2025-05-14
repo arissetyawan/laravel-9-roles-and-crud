@@ -9,10 +9,9 @@
     <div class="card-body">
 
     @if ($errors->any()) 
-                @foreach ($errors->all() as $error) 
-                    <x-alert type="danger" :message="$error" class="mt-4"/>
-                @endforeach
-        
+        @foreach ($errors->all() as $error)
+            <x-alert type="danger" :message="$error" class="mt-4"/>
+        @endforeach
     @endif
 
     <form method="POST" action="{{ Route('ticket/update') }}">
@@ -43,6 +42,24 @@
         <br />
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
+
+     <div class="form-group">
+      <div class="bg-light p-5 rounded">
+        <b>Add file</b>
+
+        <form action="{{ '/' }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group mt-4">
+              <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Save</button>
+        </form>
+
+      </div>
+    </div>
+    <br />
 
     </div>
     </div>
