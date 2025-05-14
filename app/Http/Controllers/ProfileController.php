@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth; 
-use App\Repositories\user\UserRepository;
+use App\Repositories\User\UserRepository;
 use App\Http\Requests\profile\PasswordProfileRequest;
 use App\Http\Requests\profile\ProfileRequest;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +37,7 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $this->userRepository->updateById($request->id,$request->except('id'));
-        toast('Your data as been updatedt!','success');
+        toast('Your data as been updated!','success');
         return redirect()->back(); 
     }
 
@@ -56,7 +56,7 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->newPassword);
             $user->save();
         
-            toast('Your password as been updatedt!','success');
+            toast('Your password as been updated!','success');
             return redirect()->back();
 
         }

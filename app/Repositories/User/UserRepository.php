@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Repositories\category;
+namespace App\Repositories\User;
 
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-use App\Models\Category;
-
+use App\Models\User;
 
 /**
- * Class CategoryRepository.
+ * Class UserRepository.
  */
-class CategoryRepository extends BaseRepository
+class UserRepository extends BaseRepository
 {
     /**
      * @return string
@@ -17,6 +16,6 @@ class CategoryRepository extends BaseRepository
      */
     public function model()
     {
-        return Category::class;
+        return User::class;
     }
 }

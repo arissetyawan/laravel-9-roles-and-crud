@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\category\StoreCategoryRequest;
-use App\Http\Requests\category\UpdateCategoryRequest; 
-use App\Repositories\category\CategoryRepository;
+use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Repositories\Category\CategoryRepository;
 use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
@@ -18,7 +18,7 @@ class CategoryController extends Controller
         $this->middleware(function ($request, $next) {
 
             $this->user = Auth::user();
-            $this->authorize('is_user',$this->user);
+            $this->authorize('is_admin',$this->user);
 
             return $next($request);
         });
@@ -81,7 +81,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request)
     {
         $this->categoryRepository->updateById($request->id,$request->except('id'));
-        toast('Your Category as been updatedt!','success');
+        toast('Your Category as been updated!','success');
         return redirect('/category');
     }
 

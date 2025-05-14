@@ -19,7 +19,7 @@
 
         <div class="form-group">
           <label for="name">Category name</label>
-          <input type="text" class="form-control @error('email') is-invalid @enderror" name="name" id="name" value="{{ $category->name }}" placeholder="Category name">
+          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ $category->name }}" placeholder="Category name">
         </div>
 
         <div class="form-group">

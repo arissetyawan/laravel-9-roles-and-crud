@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ ENV('APP_NAME') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ ENV('APP_NAME') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -58,11 +58,11 @@
                                 </a>
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                @can('is_user')
-                                    <a class="dropdown-item" href="{{ route('category') }}">
+
+                                @can('is_admin')                                    <a class="dropdown-item" href="{{ route('category') }}">
                                         {{ __('Category Management') }}
                                     </a>
-                                 @endif
+                                @endif
 
                                 @can('is_admin')
                                     <a class="dropdown-item" href="{{ route('role') }}">

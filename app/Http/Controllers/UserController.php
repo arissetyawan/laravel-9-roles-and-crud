@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
  
-use App\Repositories\user\UserRepository;
-use App\Http\Requests\user\StoreUserRequest;
-use App\Http\Requests\user\UpdateUserRequest;
+use App\Repositories\User\UserRepository;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Repositories\Role\RoleRepository;
 use Illuminate\Support\Facades\Auth; 
 
@@ -88,7 +88,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request)
     {
         $this->userRepository->updateById($request->id,$request->except('id'));
-        toast('Your Role as been updatedt!','success');
+        toast('Your Role as been updated!','success');
         return redirect('/user');
     }
 

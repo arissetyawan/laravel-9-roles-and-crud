@@ -81,7 +81,7 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request)
     {
         $this->roleRepository->updateById($request->id,$request->except('id'));
-        toast('Your Role as been updatedt!','success');
+        toast('Your Role as been updated!','success');
         return redirect('/role');
     }
 
