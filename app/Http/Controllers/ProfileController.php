@@ -37,7 +37,7 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $this->userRepository->updateById($request->id,$request->except('id'));
-        toast('Your data as been updated!','success');
+        toast('Data seting berhasil diperbarui!','success');
         return redirect()->back(); 
     }
 
@@ -56,12 +56,12 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->newPassword);
             $user->save();
         
-            toast('Your password as been updated!','success');
+            toast('Password berhasil diperbarui!','success');
             return redirect()->back();
 
         }
 
-        toast('Check your old password !','error');
+        toast('Periksa kembali password lama Anda!','error');
         return redirect()->back(); 
     }
 

@@ -55,7 +55,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $this->categoryRepository->create($request->all());
-        toast('Your Category as been submited!','success');
+        toast('Kategori berhasil disimpan!','success');
         return redirect('category');
     }
 
@@ -81,7 +81,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request)
     {
         $this->categoryRepository->updateById($request->id,$request->except('id'));
-        toast('Your Category as been updated!','success');
+        toast('Kategori berhasil diperbarui!','success');
         return redirect('/category');
     }
 
@@ -94,7 +94,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->categoryRepository->deleteById($id);
-        toast('Your Category as been deleted!','success');
+        toast('Kategori berhasil dihapus!','success');
         return redirect()->back();
     }
 }

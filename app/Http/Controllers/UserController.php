@@ -63,7 +63,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     { 
         $this->userRepository->create($request->all());
-        toast('Your User as been submited!','success');
+        toast('User berhasil dibuat!','success');
         return redirect('/user');
     } 
 
@@ -88,7 +88,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request)
     {
         $this->userRepository->updateById($request->id,$request->except('id'));
-        toast('Your Role as been updated!','success');
+        toast('User berhasil diperbarui!','success');
         return redirect('/user');
     }
 
@@ -101,6 +101,7 @@ class UserController extends Controller
     public function destroy($id)
     { 
         $this->userRepository->deleteById($id);
-        return redirect()->back()->with('success','test dev');
+        toast('User berhasil dihapus!','success');
+        return redirect()->back();
     }
 }

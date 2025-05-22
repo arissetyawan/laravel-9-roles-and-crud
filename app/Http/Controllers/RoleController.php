@@ -55,7 +55,7 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     { 
         $this->roleRepository->create($request->all());
-        toast('Your Role as been submited!','success');
+        toast('Role berhasil disimpan!','success');
         return redirect()->back();
     } 
 
@@ -81,7 +81,7 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request)
     {
         $this->roleRepository->updateById($request->id,$request->except('id'));
-        toast('Your Role as been updated!','success');
+        toast('Role berhasil diperbarui!','success');
         return redirect('/role');
     }
 
@@ -94,6 +94,7 @@ class RoleController extends Controller
     public function destroy($id)
     { 
         $this->roleRepository->deleteById($id);
-        return redirect()->back()->with('success','test dev');
+        toast('Role berhasil dihapus!','success');
+        return redirect()->back();
     }
 }

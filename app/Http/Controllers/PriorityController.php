@@ -56,7 +56,7 @@ class PriorityController extends Controller
     public function store(StorepriorityRequest $request)
     {
         $this->priorityRepository->create($request->all());
-        toast('Your priority as been submited!','success');
+        toast('Prioritas berhasil disimpan!','success');
         return redirect('priority');
     }
 
@@ -82,7 +82,7 @@ class PriorityController extends Controller
     public function update(UpdatepriorityRequest $request)
     {
         $this->priorityRepository->updateById($request->id,$request->except('id'));
-        toast('Your priority as been updated!','success');
+        toast('Prioritas berhasil diperbarui!','success');
         return redirect('/priority');
     }
 
@@ -95,7 +95,7 @@ class PriorityController extends Controller
     public function destroy($id)
     {
         $this->priorityRepository->deleteById($id);
-        toast('Your priority as been deleted!','success');
+        toast('Prioritas berhasil dihapus!','success');
         return redirect()->back();
     }
 }

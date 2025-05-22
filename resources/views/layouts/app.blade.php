@@ -59,29 +59,30 @@
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                @can('is_user')                                    <a class="dropdown-item" href="{{ route('ticket') }}">
+                                @can('is_user')
+                                  <a class="dropdown-item" href="{{ route('ticket') }}">
                                         {{ __('Tickets') }}
-                                    </a>
+                                  </a>
                                 @endif
-                                @can('is_admin')                                    <a class="dropdown-item" href="{{ route('category') }}">
+                                @can('is_admin')
+                                  <a class="dropdown-item" href="{{ route('ticket') }}">
+                                        {{ __('Tickets') }}
+                                  </a>
+                                    <a class="dropdown-item" href="{{ route('category') }}">
                                         {{ __('Categories') }}
                                     </a>
-                                @endif
-
-                                @can('is_admin')                                    <a class="dropdown-item" href="{{ route('priority') }}">
+                                    <a class="dropdown-item" href="{{ route('priority') }}">
                                         {{ __('Priorities') }}
                                     </a>
-                                @endif
-
-                                @can('is_admin')
                                     <a class="dropdown-item" href="{{ route('role') }}">
                                         {{ __('Roles') }}
                                     </a>
 
-                                  <a class="dropdown-item" href="{{ route('user') }}">
+                                    <a class="dropdown-item" href="{{ route('user') }}">
                                         {{ __('Users') }}
                                     </a>
                                 @endif
+
                                    <a class="dropdown-item" href="{{ route('profile/edit') }}">
                                         {{ __('Settings') }}
                                     </a>

@@ -21,8 +21,6 @@ class TicketController extends Controller
         $this->middleware(function ($request, $next) {
 
             $this->user = Auth::user();
-            $this->authorize('is_user',$this->user);
-
             return $next($request);
         });
     }
@@ -59,7 +57,7 @@ class TicketController extends Controller
     public function store(StoreticketRequest $request)
     {
         $ticket = $this->ticketRepository->create($request->all());
-        toast('Your ticket as been submited!','success');
+        toast('Tiket berhasil dibuat!','success');
         return redirect()->route('ticket/edit', ['id'=> $ticket->id]);
     }
 
@@ -86,7 +84,7 @@ class TicketController extends Controller
     public function update(UpdateticketRequest $request)
     {
         $this->ticketRepository->updateById($request->id,$request->except('id'));
-        toast('Your ticket as been updated!','success');
+        toast('Tiket berhasil diperbarui!','success');
         return redirect('/ticket');
     }
 
@@ -98,8 +96,9 @@ class TicketController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('is_admin',$this->user);
         $this->ticketRepository->deleteById($id);
-        toast('Your ticket as been deleted!','success');
+        toast('Ticket berhasil dihapus!','success');
         return redirect()->back();
     }
 }
