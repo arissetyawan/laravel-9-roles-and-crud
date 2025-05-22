@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Repositories\Role\RoleRepository; 
@@ -93,8 +94,15 @@ class RoleController extends Controller
      */
     public function destroy($id)
     { 
-        $this->roleRepository->deleteById($id);
-        toast('Role berhasil dihapus!','success');
+        $role = Role::find($id);
+        if($role->name=='admin'){
+            toast('Role admin tidak dapat dihapus!','error');
+        }
+        else{
+            $this->roleRepository->deleteById($id);
+            toast('Role berhasil dihapus!','success');
+        }
+
         return redirect()->back();
     }
 }

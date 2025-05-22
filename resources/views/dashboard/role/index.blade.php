@@ -7,15 +7,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Role') }} <a href="{{ Route('role/create') }}" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i></a></div>
+                <div class="card-header">{{ __('Peran') }} <a href="{{ Route('role/create') }}" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i></a></div>
 
                 <div class="card-body">
                 <table class="table">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Description</th>
+                      <th scope="col">Nama</th>
+                      <th scope="col">Deskripsi</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -26,8 +26,13 @@
                       <td>{{ $role->name }}</td>
                       <td>{{ $role->description }}</td>
                       <td>
+                      @if($role->name!='admin')
                       <a href="{{ Route('role/edit',$role->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                      <a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                      {{$role->users()->count()==0}}
+                        @if($role->users()==null)
+                        <a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        @endif
+                      @endif
                     </td>
                     </tr>
                 @endforeach

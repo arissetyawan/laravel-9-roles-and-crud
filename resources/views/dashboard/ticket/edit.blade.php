@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-    <div class="card-header">{{ __('Ticket') }}</div>
+    <div class="card-header">{{ __('Tiket') }}</div>
     <div class="card-body">
 
     @if ($errors->any()) 
@@ -19,7 +19,7 @@
 
         <input type="hidden" name="id" value="{{ $ticket->id }}">
         <div class="form-group">
-          <label for="name">Description</label>
+          <label for="name">Deskripsi</label>
           <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="3">{{ $ticket->description }}</textarea>
           @error('description')
           <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
@@ -27,7 +27,7 @@
         </div>
         <br />
         <div class="form-group">
-          <label for="description">category</label>
+          <label for="description">Kategori</label>
           <select name="category_id"  id="category_id" class="form-control @error('category') is-invalid @enderror">
               @foreach($categories as $category)
                 <option @if($category->id == $ticket->category_id) selected @endif value="{{ $category->id }}">{{ $category->name }} </option>

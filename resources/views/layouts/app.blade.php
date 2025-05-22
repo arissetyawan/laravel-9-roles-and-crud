@@ -61,30 +61,30 @@
 
                                 @can('is_user')
                                   <a class="dropdown-item" href="{{ route('ticket') }}">
-                                        {{ __('Tickets') }}
+                                        {{ __('Tiket') }}
                                   </a>
                                 @endif
                                 @can('is_admin')
                                   <a class="dropdown-item" href="{{ route('ticket') }}">
-                                        {{ __('Tickets') }}
+                                        {{ __('Tiket') }}
                                   </a>
                                     <a class="dropdown-item" href="{{ route('category') }}">
-                                        {{ __('Categories') }}
+                                        {{ __('Kategori') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('priority') }}">
-                                        {{ __('Priorities') }}
+                                        {{ __('Prioritas') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('role') }}">
-                                        {{ __('Roles') }}
+                                        {{ __('Peran') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('user') }}">
-                                        {{ __('Users') }}
+                                        {{ __('Pengguna') }}
                                     </a>
                                 @endif
 
                                    <a class="dropdown-item" href="{{ route('profile/edit') }}">
-                                        {{ __('Settings') }}
+                                        {{ __('Seting') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

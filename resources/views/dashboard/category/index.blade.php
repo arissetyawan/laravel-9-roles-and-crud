@@ -7,15 +7,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Categorys') }} <a href="{{ Route('category/create') }}" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i></a></div>
+                <div class="card-header">{{ __('Kategori') }} <a href="{{ Route('category/create') }}" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i></a></div>
 
                 <div class="card-body">
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Deskripsi</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>

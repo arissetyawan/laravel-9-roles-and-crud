@@ -94,6 +94,7 @@ class PriorityController extends Controller
      */
     public function destroy($id)
     {
+
         $this->priorityRepository->deleteById($id);
         toast('Prioritas berhasil dihapus!','success');
         return redirect()->back();
