@@ -8,6 +8,7 @@ use App\Repositories\Ticket\TicketRepository;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Priority\PriorityRepository;
 use App\Repositories\User\UserRepository;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
@@ -90,6 +91,10 @@ class TicketController extends Controller
      */
     public function update(UpdateticketRequest $request)
     {
+        $ticket = Ticket::find($request['id']);
+        if($request['assigned_id']!=null && $ticket->status_id==1){
+            $request['status_id'] = 2;
+        }
         $this->ticketRepository->updateById($request->id,$request->except('id'));
         toast('Tiket berhasil diperbarui!','success');
         return redirect('/ticket');
