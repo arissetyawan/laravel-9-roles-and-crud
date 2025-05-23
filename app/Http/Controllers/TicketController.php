@@ -6,6 +6,8 @@ use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Repositories\Ticket\TicketRepository;
 use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Priority\PriorityRepository;
+use App\Repositories\User\UserRepository;
 use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
@@ -13,11 +15,12 @@ class TicketController extends Controller
 
     public $ticketRepository;
 
-    public function __construct(TicketRepository $ticketRepository, CategoryRepository $categoryRepository)
+    public function __construct(TicketRepository $ticketRepository, CategoryRepository $categoryRepository, PriorityRepository $priorityRepository, UserRepository $userRepository)
     {
         $this->ticketRepository =  $ticketRepository;
         $this->categoryRepository = $categoryRepository;
-
+        $this->priorityRepository = $priorityRepository;
+        $this->userRepository = $userRepository;
         $this->middleware(function ($request, $next) {
 
             $this->user = Auth::user();
@@ -45,7 +48,8 @@ class TicketController extends Controller
     public function create()
     {
         $categories = $this->categoryRepository->all();
-        return view('dashboard.ticket.create',compact('categories'));
+        $prioritas = $this->priorityRepository->all();
+        return view('dashboard.ticket.create',compact('categories','prioritas'));
     }
 
     /**
@@ -70,8 +74,11 @@ class TicketController extends Controller
     public function edit($id)
     {
         $categories = $this->categoryRepository->all();
+        $prioritas = $this->priorityRepository->all();
         $ticket = $this->ticketRepository->getById($id);
-        return view('dashboard.ticket.edit',compact('ticket','categories'));
+        $role_rt = 3;
+        $assigneds = $this->userRepository->byRole($role_rt);
+        return view('dashboard.ticket.edit',compact('ticket','categories','prioritas','assigneds'));
     }
 
     /**

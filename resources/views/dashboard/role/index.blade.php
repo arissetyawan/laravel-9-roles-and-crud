@@ -16,7 +16,7 @@
                       <th scope="col">#</th>
                       <th scope="col">Nama</th>
                       <th scope="col">Deskripsi</th>
-                      <th scope="col">Action</th>
+                      <th scope="col" class="col-3">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -28,8 +28,7 @@
                       <td>
                       @if($role->name!='admin')
                       <a href="{{ Route('role/edit',$role->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                      {{$role->users()->count()==0}}
-                        @if($role->users()==null)
+                        @if($role->users()->count()==0)
                         <a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         @endif
                       @endif

@@ -6,14 +6,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Edit ') }} {{ $user->name }}</div>
+                <div class="card-header">{{ __('Edit ') }}: {{ $user->name }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('user/update') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" value="{{ $user->name }}" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Login') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" value="{{ $user->email }}" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+                            <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Role/Peran') }}</label>
 
                             <div class="col-md-6"> 
                                 <select name="role_id"  id="role_id" class="form-control @error('role') is-invalid @enderror">

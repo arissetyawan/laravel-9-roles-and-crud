@@ -14,8 +14,7 @@ class Ticket extends Model
      *
      * @var array
      */
-    protected $fillable = ['status_id','description','category_id','reporter_id'];
-
+    protected $fillable = ['status_id','description','category_id','reporter_id', 'assigned_id', 'priority_id'];
 
     /**
      * Get the user.
@@ -29,4 +28,16 @@ class Ticket extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class);
+    }
+
+    public function reporter_name()
+    {
+        $user = User::find($this->reporter_id);
+        return ($user==null ? '-' : $user->name);
+    }
+
+
 }

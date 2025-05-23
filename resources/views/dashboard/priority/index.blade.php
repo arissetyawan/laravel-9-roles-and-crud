@@ -14,8 +14,8 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="col-8">Name</th>
-                        <th scope="col" class="col-2">Action</th>
+                        <th scope="col" class="col-8">Nama</th>
+                        <th scope="col" class="col-3">Action</th>
                     </tr>
                     </thead>
                     <tbody>

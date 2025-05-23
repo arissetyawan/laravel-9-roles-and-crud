@@ -40,13 +40,46 @@
           @enderror
         </div>
         <br />
+        <div class="form-group">
+          <label for="description">Pelapor</label>
+          <input type="text" class="form-control" disabled='true' name="reporter_name" id="reporter_name" value="{{ $ticket->reporter_name() }}" placeholder="Role name">
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="description">Petugas</label>
+          <select name="assigned_id"  id="assigned_id" class="form-control @error('assigned') is-invalid @enderror">
+              @foreach($assigneds as $assigned)
+                <option @if($assigned->id == $ticket->assigned_id) selected @endif value="{{ $assigned->id }}">{{ $assigned->name }} </option>
+            @endforeach
+          </select>
+          @error('assigned')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="priority_id">Prioritas</label>
+          <select name="priority_id" id="priority_id" {{Auth::user()->role_id!=1 ? 'disabled': ''}} class="form-control @error('priority') is-invalid @enderror">
+              @foreach($prioritas as $priority)
+                <option @if($priority->id == $ticket->priority_id) selected @endif value="{{ $priority->id }}">{{ $priority->name }} </option>
+              @endforeach
+          </select>
+          @error('priority')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+        </div>
+        <br />
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
 
      <div class="form-group">
       <div class="bg-light p-5 rounded">
-        <b>Add file</b>
+        <b>Sertakan Berkas Gambar</b>
 
         <form action="{{ '/' }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -54,7 +87,7 @@
               <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Save</button>
+            <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Kirim</button>
         </form>
 
       </div>

@@ -20,7 +20,6 @@
 
         <input type="hidden" name="id" value="{{ $priority->id }}">
 
-
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ $priority->name }}" placeholder="name">

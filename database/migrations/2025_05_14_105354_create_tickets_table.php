@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('reporter_id')->default(0);
             $table->integer('assigned_id')->default(0);
+            $table->integer('priority_id')->default(0);
             $table->integer('status_id')->default(1);
             $table->dateTime('reported_at', precision: 0)->default(now());
             $table->dateTime('assigned_at', precision: 0)->default(now());

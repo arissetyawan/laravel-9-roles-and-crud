@@ -16,7 +16,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Deskripsi</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="col-3">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -24,7 +24,7 @@
                     <tr>
                         <th scope="row">{{ $category->id }}</th>
                         <td>{{ $category->name }}</td>
-                        <td>{{ $category->description }}</td>
+                        <td>{!! Str::words($category->description, 3, ' ...') !!}</td>
                         <td>
                         <a href="{{ Route('category/edit',$category->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         <a href="{{ Route('category/destroy',$category->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
