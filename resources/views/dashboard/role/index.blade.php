@@ -10,7 +10,7 @@
                 <div class="card-header">{{ __('Peran') }} <a href="{{ Route('role/create') }}" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i></a></div>
 
                 <div class="card-body">
-                <table class="table">
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">#</th>

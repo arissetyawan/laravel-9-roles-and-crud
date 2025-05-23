@@ -39,5 +39,14 @@ class Ticket extends Model
         return ($user==null ? '-' : $user->name);
     }
 
-
+    public function get_color()
+    {
+        if($this->priority->name=='biasa'){
+            return '#000';
+        }else if ($this->priority->name=='segera'){
+            return '#00f';
+        }else{
+            return '#f00';
+        }
+    }
 }
