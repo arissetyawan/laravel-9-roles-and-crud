@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-    <div class="card-header">{{ __('Tiket') }} Status: <b>{{ $ticket->get_status_name() }}</b></div>
+    <div class="card-header" >{{ __('Tiket') }} Status: <b>{{ $ticket->get_status_name() }}</b></div>
     <div class="card-body">
 
     @if ($errors->any()) 
@@ -74,13 +74,13 @@
           @enderror
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-warning">Selesai</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-warning">Tiket Selesai Dikerjakan</button>
         <hr />
         <div class="form-group">
             <table class="table table-hover">
                 <thead>
-                <tr>
+                <tr class="{{$ticket->get_class()}}">
                     <th scope="col">Umpan balik selesai</th>
                 </tr>
                 </thead>

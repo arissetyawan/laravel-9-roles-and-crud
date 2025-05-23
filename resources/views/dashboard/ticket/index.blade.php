@@ -14,19 +14,19 @@
                     <thead>
                     <tr>
                         <th scope="col" class="col-1">#</th>
-                        <th scope="col" class="col">Deskripsi</th>
+                        <th scope="col" class="col">Detail</th>
                         <th scope="col" class="col-2">Kategori</th>
-                        <th scope="col" class="col-2">Dibuat</th>
+                        <th scope="col" class="col-2">Petugas</th>
                         <th scope="col" class="col-2" colspan="2">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($tickets as $ticket)
-                     <tr style="border: 1px solid {{$ticket->get_color()}}" title="{{$ticket->priority->name}}" >
+                     <tr class="{{$ticket->get_class()}}" title="{{$ticket->priority->name}}" >
                         <td>{{ $ticket->id }}</td>
-                        <td>{!! Str::words($ticket->description, 3, ' ...') !!}</td>
+                        <td>{!! Str::limit($ticket->description, 15, ' ...') !!}<up> <b>{{ $ticket->get_status_name() }}</b></up></td>
                         <td>{{ $ticket->category->name }}</td>
-                        <td>{{ $ticket->created_at->toDateTimeString() }}</td>
+                        <td>{{ $ticket->get_assigned_name() }}</td>
                         <td>
                         <a href="{{ Route('ticket/edit',$ticket->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         </td>
@@ -35,6 +35,10 @@
                         <a href="{{ Route('ticket/destroy',$ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         @endif
                         </td>
+                    </tr>
+                    <tr title="{{$ticket->priority->name}}" >
+                        <td></td>
+                        <td colspan="5"><small><i class="fa fa-calendar"></i> {{ $ticket->created_at->toDateTimeString() }}</small> oleh {{$ticket->get_reporter_name()}}</td>
                     </tr>
                 @endforeach
                     </tbody>

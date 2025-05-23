@@ -42,19 +42,32 @@ class Ticket extends Model
         return ($user==null ? '-' : $user->name);
     }
 
-    public function get_color()
+    public function get_assigned_name()
+    {
+        $user = User::find($this->assigned_id);
+        return ($user==null ? '?' : $user->name);
+    }
+    public function get_reporter_name()
+    {
+        $user = User::find($this->reporter_id);
+        return ($user==null ? '?' : $user->name);
+    }
+
+    public function get_class()
     {
         if($this->priority->name=='biasa'){
-            return '#000';
+            return 'table-info';
         }else if ($this->priority->name=='segera'){
-            return '#00f';
+            return 'table-warning';
+        }else if ($this->priority->name=='darurat'){
+            return 'table-danger';
         }else{
-            return '#f00';
+            return 'table-secondary';
         }
     }
 
     public function get_status_name()
     {
-       return ($this->status==null? '-' : $this->status->name);
+       return ($this->status==null? 'Baru' : $this->status->name);
     }
 }

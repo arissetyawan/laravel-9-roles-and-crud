@@ -50,7 +50,7 @@
           @enderror
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Laporkan</button>
       </form>
         </div>
         </div>
