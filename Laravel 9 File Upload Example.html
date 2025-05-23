@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="clckd" content="56a7f627c53f029fd7929d499a343ed9">
+    <script type="text/javascript" async="" src="./Laravel 9 File Upload Example_files/analytics.js"></script><script type="text/javascript" async="" src="./Laravel 9 File Upload Example_files/js"></script><script src="./Laravel 9 File Upload Example_files/358586736427841" async=""></script><script async="" src="./Laravel 9 File Upload Example_files/fbevents.js"></script><script async="" src="./Laravel 9 File Upload Example_files/js(1)"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-161003041-3');
+    </script>
+    
+	        
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <!-- Primary Meta Tags -->
+                                    <title>Laravel 9 File Upload Example</title>
+                            <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <link rel="canonical" href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example">
+        <meta name="author" content="Code And Deploy">
+                <meta name="title" content="Laravel 9 File Upload Example">
+                <meta name="description" content="I will be going to share how to implement a simple Laravel 9 file upload with a database implementation. And we will associate the file with the current user login.">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example">
+                    <meta property="og:title" content="Laravel 9 File Upload Example">
+                <meta property="og:description" content="I will be going to share how to implement a simple Laravel 9 file upload with a database implementation. And we will associate the file with the current user login.">
+                    <meta property="og:image" content="https://ecn-storage.s3.us-west-2.amazonaws.com/articles/laravel-8-file-upload-examplex980.webp">
+            <meta property="og:image:width" content="850">
+            <meta property="og:image:height" content="400">
+        
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example">
+
+                    <meta property="twitter:title" content="Laravel 9 File Upload Example">
+        
+
+        <meta property="twitter:description" content="I will be going to share how to implement a simple Laravel 9 file upload with a database implementation. And we will associate the file with the current user login.">
+                    <meta property="twitter:image" content="https://ecn-storage.s3.us-west-2.amazonaws.com/articles/laravel-8-file-upload-examplex980.webp">
+        
+        <!-- CSRF Token -->
+                    <meta property="article:handle" content="laravel-8-file-upload-example">
+                <meta name="csrf-token" content="CzeVG2SawNCMCNrbeTKhykS9Xc5MSW3b139RxFFN">
+                    <meta property="article:section" content="Blog">
+                            <meta property="article:published_time" content="2021-08-31 13:22:16">
+                            <meta property="article:modified_time" content="2022-06-14 13:31:16">
+        
+                                    <meta property="article:tag" content="laravel 8">
+                            <meta property="article:tag" content="PHP">
+                    
+                <script type="application/ld+json">
+            {
+                "@context":"http://schema.org",
+                "@type":"Article",
+                "mainEntityOfPage":{
+                    "@type":"WebPage",
+                    "@id":"https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example"
+                },
+                "url":"https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example",
+                "image":
+                [
+                    "https://ecn-storage.s3.us-west-2.amazonaws.com/articles/laravel-8-file-upload-examplex980.webp"
+                ],
+                "publisher":
+                {
+                    "@context":"http://schema.org",
+                    "@type":"Organization",
+                    "name":"Code And Deploy Community",
+                    "logo":{
+                        "@context":"http://schema.org",
+                        "@type":"ImageObject",
+                        "url":"https://codeanddeploy.com/theme/landing/img/favicon.png","width":"192","height":"192"
+                    }
+                },
+                "headline":"Laravel 9 File Upload Example",
+                "author":{
+                    "@context":"http://schema.org",
+                    "@type":"Person",
+                    "url":"https://codeanddeploy.com/admin",
+                    "name":"Code And Deploy"
+                },
+                "datePublished":"2021-08-31 13:22:16",
+                "dateModified":"2022-06-14 13:31:16"
+            }
+        </script>
+        
+        <!-- Favicons -->
+        <link href="https://codeanddeploy.com/theme/landing/img/favicon.png" rel="icon">
+        <link href="https://codeanddeploy.com/theme/landing/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com/">
+        <link href="./Laravel 9 File Upload Example_files/css2" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link rel="stylesheet" href="./Laravel 9 File Upload Example_files/styles.min.css">
+    
+                                        <link rel="stylesheet" href="./Laravel 9 File Upload Example_files/prism.css">
+                        
+                
+            <meta name="facebook-domain-verification" content="lgxlky0mlnvdll8fqums33dinhsgrt">
+        <meta name="google-site-verification" content="G-sgTjhTs139I2aZcXHxoDRNYMbiR21ylbm8Nk-aEMk">
+        <meta name="p:domain_verify" content="970e1c024b81687c90c0f4a6f7cedb5c">
+        <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8360209967071180"
+     crossorigin="anonymous"></script> -->
+
+        <!-- Meta Pixel Code -->
+        <script>
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '358586736427841');
+            fbq('track', 'PageView');
+
+            
+                    </script>
+        <!-- <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=358586736427841&ev=PageView&noscript=1"
+        /></noscript> -->
+        <!-- End Meta Pixel Code -->
+
+
+        
+            <style>.swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;background:#fff;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row;padding:0}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;padding:0;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em;padding:0}.swal2-popup.swal2-toast .swal2-styled{margin:.125em .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(100,150,200,.5)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-no-transition{transition:none!important}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:5px;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center;padding:0 1.8em}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0;padding:0 1.6em}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 transparent #2778c4 transparent}.swal2-styled{margin:.3125em;padding:.625em 1.1em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#2778c4;color:#fff;font-size:1.0625em}.swal2-styled.swal2-deny{border:0;border-radius:.25em;background:initial;background-color:#d14529;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#757575;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;height:.25em;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;align-items:center;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:5px;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close:focus{outline:0;box-shadow:inset 0 0 0 3px rgba(100,150,200,.5)}.swal2-close::-moz-focus-inner{border:0}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0 1.6em;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-input-label{display:flex;justify-content:center;margin:1em auto}.swal2-validation-message{display:none;align-items:center;justify-content:center;margin:0 -2.7em;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:"!";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1;zoom:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;zoom:1;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;zoom:1;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;zoom:1;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;zoom:1;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;zoom:1;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent!important}body.swal2-no-backdrop .swal2-container>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-container.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-top-left,body.swal2-no-backdrop .swal2-container.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-top-end,body.swal2-no-backdrop .swal2-container.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-container.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-left,body.swal2-no-backdrop .swal2-container.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-end,body.swal2-no-backdrop .swal2-container.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom-left,body.swal2-no-backdrop .swal2-container.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-bottom-end,body.swal2-no-backdrop .swal2-container.swal2-bottom-right{right:0;bottom:0}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}</style></head>
+
+	<body class="font-sans bg-gray-background text-gray-900 text-base">
+
+		<div class="preloader">
+			<svg class="preloader-circular" viewBox="25 25 50 50">
+				<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+			</svg>
+		</div>
+		<!-- ============================================================== -->
+		<!-- Container fluid  -->
+		<!-- ============================================================== -->
+		<div class="landing-page">
+
+			<header id="header" class="w-full bg-head-900 header-scrolled">
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <nav>
+        <div class="mx-auto px-2 sm:px-6 lg:px-6">
+            <div class="relative flex items-center justify-between h-16">
+                <div class="flex items-center justify-center mr-3 lg:mr-0 sm:mr-0">
+                                    </div>
+                <div class="flex-1 flex items-center sm:items-stretch sm:justify-start">
+                    <a href="https://codeanddeploy.com/">
+                        <div class="flex-shrink-0 flex items-center">
+                            <img class="h-8 mt-1" src="./Laravel 9 File Upload Example_files/logo.png" alt="Code And Deploy Logo" height="16px">
+                        </div>
+                    </a>
+                    <div class="hidden sm:block sm:ml-6">
+                        <div class="flex space-x-4">
+                            <a href="https://codeanddeploy.com/" class="text-white hover:text-gray-300 px-2 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out" aria-current="page">HOME</a>
+
+                            <a href="https://codeanddeploy.com/category/php" class="text-white hover:text-gray-300 px-2 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out">PHP</a>
+
+                            <a href="https://codeanddeploy.com/category/laravel" class="text-white hover:text-gray-300 px-2 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out">LARAVEL</a>
+
+                            <a href="https://codeanddeploy.com/category/jquery" class="text-white hover:text-gray-300 px-2 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out">JQUERY</a>
+
+                            <!-- <a href="/category/css" class="text-white hover:text-gray-300 px-2 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out">CSS</a> -->
+                        
+                            <span class="bybit-ad bybit-top-menu"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=header" target="_blank" rel="nofollow" class="link-header-banner text-white hover:text-gray-300 px-2 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out link-header-banner1 bybit-border-top-menu">JOIN BYBIT AND RECEIVE UP TO <span class="bybit-color">$6,045</span> IN BONUSES</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                                            
+                                        <!-- Mobile menu dropdown -->
+                     <div class="ml-3 relative dropdown dropselect block sm:hidden">
+                        <button type="button" class="dropdown-toggle text-gray-200 flex text-base rounded-lg hover:text-gray-400 focus:outline-none focus:text-gray-100 transition duration-150 ease-in-out" data-toggle="dropdown" id="MobileMenuDropdown" aria-expanded="false">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                            </svg>
+                        </button>
+                        <div id="MobileMenuDropdown" class="dropdown-menu dropdown-menu-right origin-top-right absolute right-0 mt-2 z-50 w-72 transform-gpu -translate-x-48 translate-y-5 rounded-xl py-3 bg-white shadow-dialog" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" x-placement="bottom-start">
+                            <a class="block px-4 py-2 text-base leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" tabindex="-1" href="https://codeanddeploy.com/">HOME</a>
+                            <a class="block px-4 py-2 text-base leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" tabindex="-1" href="https://codeanddeploy.com/category/php">PHP</a>
+                            <a class="block px-4 py-2 text-base leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" tabindex="-1" href="https://codeanddeploy.com/category/laravel">LARAVEL</a>
+                            <a class="block px-4 py-2 text-base leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" tabindex="-1" href="https://codeanddeploy.com/category/jquery">JQUERY</a>
+                            <a class="block px-4 py-2 text-base leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" tabindex="-1" href="https://codeanddeploy.com/category/css">CSS</a>
+                            <!-- <div class="overflow-ellipsis mt-1 px-4 py-2 border-t border-gray-100 leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                <span class="block font-bold">Resources</span>
+                                <a class="block px-4 py-2 text-base leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" tabindex="-1" href="">Top 100 Shopify Stores</a>
+                                <a class="block px-4 py-2 text-base leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" tabindex="-1" href="#">Top 1000 Shopify Stores</a>
+                            </div> -->
+                                                        
+                                                    </div>
+                     </div>
+                    <!-- End Mobile menu dropdown -->
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:hidden hidden" id="mobile-menu" data-aria-hidden="true">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="https://codeanddeploy.com/" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out" aria-current="page">Home</a>
+
+            <a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out">Tools</a>
+
+            <a href="https://codeanddeploy.com/" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-semibold transition duration-150 ease-in-out">Project</a>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        
+	        </div>
+
+    <div class="absolute -bottom-1 left-0 h-1 bg-transparent w-full transition duration-500 transition-all" id="page_loader_container">
+        <div class="h-1 bg-blue-500 w-0 transform transition-all duration-500 ease-out" id="page_loader"></div>
+    </div>
+
+</header><!-- End Header -->
+
+
+
+<main id="main">
+    <section class="h-full">
+                    <div class="blog-content lg:mx-auto px-6 font-segoe font-semibold">
+        <div class="grid grid-cols-12 transition duration-150 ease-in-out">
+            <article class="row-start-1 xl:col-span-9 col-span-12 mt-8">
+                <div class="head-title bg-gradient-to-r from-violet-500 to-violet-300 rounded-xl mb-6 text-white">
+                    <h1 class="text-4xl px-7 py-5">Laravel 9 File Upload Example</h1>
+                                        <ul class="mt-1 px-7">
+                                                    <li class="inline-flex max-w-full mb-1 mr-1">
+                                <span class="inline-flex border border-white rounded-full bg-violet-300 text-white px-3 py-1 text-sm font-semibold border-opacity-20 hover:bg-white hover:text-gray-900 transition duration-150 ease-in-out">
+                                    # laravel 8
+                                </span>
+                            </li>
+                                                    <li class="inline-flex max-w-full mb-1 mr-1">
+                                <span class="inline-flex border border-white rounded-full bg-violet-300 text-white px-3 py-1 text-sm font-semibold border-opacity-20 hover:bg-white hover:text-gray-900 transition duration-150 ease-in-out">
+                                    # PHP
+                                </span>
+                            </li>
+                                            </ul>
+                                        <div class="flex items-center justify-between text-sm px-7 py-3 mt-4 bg-white bg-opacity-10">
+                        <div class="flex items-center">
+                            <svg class="h-4 w-4 mr-1.5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="mr-1 font-semibold">Admin posted this </span>
+                            <span class="font-semibold">3 years ago</span>
+                        </div>
+                        <div class="flex items-center font-semibold">
+                            <svg class="h-4 w-4 mr-1.5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="mr-1">5 minutes to read</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-body flex mb-6">
+                    <div class="w-72 h-full sticky top-4 left-0 flex lg:flex hidden">
+                        <div class="h-full w-full my-4">
+                            <p class="text-bold text-base uppercase text-gray-500">Table of contents</p>
+                            <ul class="pl-2 mt-2" id="TableOfContents">
+                            <li class="relative mb-4 transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#-top-" class="scroll-handler flex items-centyer pr-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out"><svg class="h-5 w-5 -ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>Top</a></li><li class="relative border-l transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#km1aRfYpR2Qu9HcHEi51DMRgx" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out" data-content-id="km1aRfYpR2Qu9HcHEi51DMRgx">Laravel File Upload</a></li><li class="relative border-l transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#VMtK75PCqCqUMUTAw8gSRin6S" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out" data-content-id="VMtK75PCqCqUMUTAw8gSRin6S">Step 1: Create file upload migrations</a></li><li class="relative border-l transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#GDyaPafy7NfKlG3zPvrj2oX2s" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out" data-content-id="GDyaPafy7NfKlG3zPvrj2oX2s">Step 2: Create file upload controller and model</a></li><li class="relative border-l transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#yberrlQ8i6blVE7n8SBGSsvzv" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out" data-content-id="yberrlQ8i6blVE7n8SBGSsvzv">Step 3: Create Laravel file upload routes</a></li><li class="relative border-l transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#vO2A9GCOS32O88zPvgy3IQ3Jr" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out" data-content-id="vO2A9GCOS32O88zPvgy3IQ3Jr">Step 4: Setup Model</a></li><li class="relative border-l transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#vPC9xSGUeJ55X3BbRsVdmRqi8" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out" data-content-id="vPC9xSGUeJ55X3BbRsVdmRqi8">Step 5: Setup Controller</a></li><li class="relative border-l transition duration-150 ease-in-out border-blue-500"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#DgDsY5elpaxdUDXDYaKXT3Grj" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out text-indigo-600" data-content-id="DgDsY5elpaxdUDXDYaKXT3Grj">Step 6: Create StoreFileRequest</a></li><li class="relative border-l transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#ssVex0zeJkcoRyAEuGhe4sccc" class="scroll-handler block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out" data-content-id="ssVex0zeJkcoRyAEuGhe4sccc">Step 7: Create View</a></li><li class="relative mt-4 transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#-bottom-" class="scroll-handler flex items-centyer pr-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out"><svg class="h-5 w-5 -ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Bottom</a></li></ul>
+                        </div>
+                    </div>
+                    <div class="xl:max-w-2xl w-full md:ml-auto" id="articleContainer">
+                        <div class="bybit-ad">
+                            <a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=content" rel="nofollow" target="_blank"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" class="blog-ads-envato-img"></a>
+                        </div>
+
+                        <div class="block lg:hidden mb-10">
+                            <p class="text-bold text-base uppercase text-gray-500">Table of contents</p>
+                            <ul class="pl-2 mt-2" id="TableOfContentsMobile">
+                            <li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#km1aRfYpR2Qu9HcHEi51DMRgx" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Laravel File Upload</a></li><li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#VMtK75PCqCqUMUTAw8gSRin6S" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Step 1: Create file upload migrations</a></li><li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#GDyaPafy7NfKlG3zPvrj2oX2s" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Step 2: Create file upload controller and model</a></li><li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#yberrlQ8i6blVE7n8SBGSsvzv" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Step 3: Create Laravel file upload routes</a></li><li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#vO2A9GCOS32O88zPvgy3IQ3Jr" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Step 4: Setup Model</a></li><li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#vPC9xSGUeJ55X3BbRsVdmRqi8" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Step 5: Setup Controller</a></li><li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#DgDsY5elpaxdUDXDYaKXT3Grj" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Step 6: Create StoreFileRequest</a></li><li class="relative transition duration-150 ease-in-out"><a href="https://codeanddeploy.com/blog/laravel/laravel-8-file-upload-example#ssVex0zeJkcoRyAEuGhe4sccc" class="block px-3 py-1.5 font-semibold text-gray-500 cursor-pointer hover:text-indigo-600 transition duration-150 ease-in-out">Step 7: Create View</a></li></ul>
+                        </div>
+                        <div id="-top-"></div>
+                                                    <div class="w-full h-auto mb-6 flex items-center justify-center">
+                                <img class="rounded-lg w-full h-full" src="./Laravel 9 File Upload Example_files/laravel-8-file-upload-examplex980.webp" alt="laravel file upload" width="672px" height="500px">
+                            </div>
+                                                                        
+                                                <div class="leading-7 font-normal rounded-xl bg-black bg-opacity-0.1 border border-gray-0.3 px-6 py-5 hover:border-gray-300">
+                            <div id="-top-"></div>
+                            <div class="break-words" id="ArticleBody"><p>In this post, I will be going to share how to implement a simple <strong>Laravel 9 file upload </strong>with a database implementation. We will save the generated file name base on time, size, and mime-type, and associate it with the current user logged. When developing an application using Laravel usually the file upload is always present even on a simple system.</p>
+<p>Â </p>
+<p><img src="./Laravel 9 File Upload Example_files/laravel-8-file-upload-example-fgxryTfFbjx980.webp" alt="laravel file upload" width="980" height="352"></p>
+<p>Â </p>
+<p><img src="./Laravel 9 File Upload Example_files/laravel-8-file-upload-example-E7tKG23k68x980.webp" alt="laravel file upload" width="980" height="256"></p>
+<p>Â </p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;" class="bybit-bordered"></a></div>
+<p><img src="./Laravel 9 File Upload Example_files/laravel-8-file-upload-example-QAUNVSwSASx980.webp" alt="laravel file upload" width="980" height="428"></p>
+<p>Â </p>
+<p>Just follow my simple steps and learn from them.</p>
+<p>Â </p>
+<p>Â </p>
+<h2 id="km1aRfYpR2Qu9HcHEi51DMRgx" class="text-3xl article-section-title font-semibold mb-4" contenteditable="false">Laravel File Upload</h2>
+<p>I assume that you have your <strong>Laravel 9 Project</strong> already in your local so we will skip that process. For more information on how to install Laravel just visit their <a title="https://laravel.com/docs/8.x" href="https://laravel.com/docs/8.x">documentation</a>.</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<p>Â </p>
+<p>Okay, let's start.</p>
+<p>Â </p>
+<p>Â </p>
+<h2 id="VMtK75PCqCqUMUTAw8gSRin6S" class="text-3xl article-section-title font-semibold mb-4" contenteditable="false">Step 1: Create file upload migrations</h2>
+<p>First, we will create our file table migrations for our File model. Run the following command to do it:</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<pre class=" language-markup" tabindex="0"><code class=" language-markup">php artisan make:migration create_files_table</code></pre>
+<p>Â </p>
+<p>Then we will add our migrations field. See below the complete code for our migrations.</p>
+<pre class=" language-php" tabindex="0"><code class=" language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Migrations<span class="token punctuation">\</span>Migration</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Schema<span class="token punctuation">\</span>Blueprint</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Schema</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">CreateFilesTable</span> <span class="token keyword">extends</span> <span class="token class-name">Migration</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * Run the migrations.
+     *
+     * @return void
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">up</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name static-context">Schema</span><span class="token operator">::</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'files'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token class-name type-declaration">Blueprint</span> <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$table</span><span class="token operator">-&gt;</span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token variable">$table</span><span class="token operator">-&gt;</span><span class="token function">unsignedBigInteger</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'user_id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token variable">$table</span><span class="token operator">-&gt;</span><span class="token keyword type-declaration">string</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token variable">$table</span><span class="token operator">-&gt;</span><span class="token keyword type-declaration">string</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'type'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token variable">$table</span><span class="token operator">-&gt;</span><span class="token keyword type-declaration">string</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'size'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token variable">$table</span><span class="token operator">-&gt;</span><span class="token function">timestamps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token variable">$table</span><span class="token operator">-&gt;</span><span class="token function">foreign</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'user_id'</span><span class="token punctuation">)</span>
+                <span class="token operator">-&gt;</span><span class="token function">references</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'id'</span><span class="token punctuation">)</span>
+                <span class="token operator">-&gt;</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'users'</span><span class="token punctuation">)</span>
+                <span class="token operator">-&gt;</span><span class="token function">onDelete</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'cascade'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * Reverse the migrations.
+     *
+     * @return void
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">down</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name static-context">Schema</span><span class="token operator">::</span><span class="token function">dropIfExists</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'files'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre>
+<p>Â </p>
+<p>Next, you have to run:</p>
+<pre class=" language-markup" tabindex="0"><code class=" language-markup">php artisan migrate</code></pre>
+<p>Â </p>
+<h2 id="GDyaPafy7NfKlG3zPvrj2oX2s" class="text-3xl article-section-title font-semibold mb-4" contenteditable="false">Step 2: Create file upload controller and model</h2>
+<p>Use the command below to create your FileController with the <code>File</code> model:</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<pre class=" language-markup" tabindex="0"><code class=" language-markup">php artisan make:controller FilesController --model=File</code></pre>
+<p>Â </p>
+<h2 id="yberrlQ8i6blVE7n8SBGSsvzv" class="text-3xl article-section-title font-semibold mb-4">Step 3: Create Laravel file upload routes</h2>
+<p>Now, let's create your routes for our Laravel file upload:</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<pre class=" language-markup" tabindex="0"><code class=" language-markup">/**
+* File Upload Routes
+*/
+Route::get('/files', 'FilesController@index')-&gt;name('files.index');
+Route::get('/files/add', 'FilesController@create')-&gt;name('files.create');
+Route::post('/files/add', 'FilesController@store')-&gt;name('files.store');</code></pre>
+<p>Â </p>
+<h2 id="vO2A9GCOS32O88zPvgy3IQ3Jr" class="text-3xl article-section-title font-semibold mb-4" contenteditable="false">Step 4: Setup Model</h2>
+<p>Next, we will set up our <code>File</code> model. See below the completed setup.</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<pre class=" language-php" tabindex="0"><code class=" language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Models</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Factories<span class="token punctuation">\</span>HasFactory</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Model</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">File</span> <span class="token keyword">extends</span> <span class="token class-name">Model</span>
+<span class="token punctuation">{</span>
+
+    <span class="token keyword">protected</span> <span class="token variable">$table</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'files'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">protected</span> <span class="token variable">$fillable</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">'user_id'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'name'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'type'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'size'</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">use</span> <span class="token package">HasFactory</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></code></pre>
+<p>Â </p>
+<h2 id="vPC9xSGUeJ55X3BbRsVdmRqi8" class="text-3xl article-section-title font-semibold mb-4" contenteditable="false">Step 5: Setup Controller</h2>
+<p>Kindly see below the complete code of our controller including the file upload in <strong>store()</strong> method.</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<pre class=" language-php" tabindex="0"><code class=" language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Controllers</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>File</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Request</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>UploadedFile</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Requests<span class="token punctuation">\</span>StoreFileRequest</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">FilesController</span> <span class="token keyword">extends</span> <span class="token class-name">Controller</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$files</span> <span class="token operator">=</span> <span class="token class-name static-context">File</span><span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token function">view</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'files.index'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">'files'</span> <span class="token operator">=&gt;</span> <span class="token variable">$files</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">view</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'files.create'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * Store a newly created resource in storage.
+     *
+     * @param  StoreFileRequest  $request
+     * @return \Illuminate\Http\Response
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">store</span><span class="token punctuation">(</span><span class="token class-name type-declaration">StoreFileRequest</span> <span class="token variable">$request</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$fileName</span> <span class="token operator">=</span> <span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'_'</span> <span class="token operator">.</span> <span class="token function">time</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'.'</span><span class="token operator">.</span> <span class="token variable">$request</span><span class="token operator">-&gt;</span><span class="token property">file</span><span class="token operator">-&gt;</span><span class="token function">extension</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+
+        <span class="token variable">$type</span> <span class="token operator">=</span> <span class="token variable">$request</span><span class="token operator">-&gt;</span><span class="token property">file</span><span class="token operator">-&gt;</span><span class="token function">getClientMimeType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$size</span> <span class="token operator">=</span> <span class="token variable">$request</span><span class="token operator">-&gt;</span><span class="token property">file</span><span class="token operator">-&gt;</span><span class="token function">getSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$request</span><span class="token operator">-&gt;</span><span class="token property">file</span><span class="token operator">-&gt;</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token function">public_path</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'file'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token variable">$fileName</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name static-context">File</span><span class="token operator">::</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">'user_id'</span> <span class="token operator">=&gt;</span> <span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">'name'</span> <span class="token operator">=&gt;</span> <span class="token variable">$fileName</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">'type'</span> <span class="token operator">=&gt;</span> <span class="token variable">$type</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">'size'</span> <span class="token operator">=&gt;</span> <span class="token variable">$size</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token function">redirect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">route</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'files.index'</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">withSuccess</span><span class="token punctuation">(</span><span class="token function">__</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'File added successfully.'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</span></code></pre>
+<p>Â </p>
+<h2 id="DgDsY5elpaxdUDXDYaKXT3Grj" class="text-3xl article-section-title font-semibold mb-4" contenteditable="false">Step 6: Create StoreFileRequest</h2>
+<p>Now let's create a request class for a <code>store/uploading</code> file. Run the command below:</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<pre class=" language-markup" tabindex="0"><code class=" language-markup">php artisan make:request StoreFileRequest</code></pre>
+<p>Â </p>
+<p>After the <strong>StoreFileRequest</strong> class is generated kindly check the code below for our validation:</p>
+<pre class=" language-php" tabindex="0"><code class=" language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Requests</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Foundation<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>FormRequest</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">StoreFileRequest</span> <span class="token keyword">extends</span> <span class="token class-name">FormRequest</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">authorize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">rules</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">'file'</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip'</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre>
+<p>Â </p>
+<h2 id="ssVex0zeJkcoRyAEuGhe4sccc" class="text-3xl article-section-title font-semibold mb-4" contenteditable="false">Step 7: Create View</h2>
+<p>First, we will create our <strong>index.blade.php</strong> see below the complete code:</p><div class="bybit-ad"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=top-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" alt="Image" style="margin-bottom: 20px;margin-top: 20px;" class="bybit-bordered"></a></div>
+<pre class=" language-markup" tabindex="0"><code class=" language-markup">@extends('layouts.app-master')
+
+@section('content')
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bg-light p-5 rounded<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>Files<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{ route(<span class="token punctuation">'</span>files.create<span class="token punctuation">'</span>) }}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>btn btn-primary float-right mb-3<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Add file<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+
+        @include('layouts.partials.messages')
+
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>table table-striped<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>col<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>col<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>col<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Size<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>col<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Type<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>col<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Action<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">&gt;</span></span>
+            @foreach($files as $file)
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>3%<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>{{ $file-&gt;id }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>{{ $file-&gt;name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>10%<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>{{ $file-&gt;size }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>10%<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>{{ $file-&gt;type }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>5%<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{ $file-&gt;type }}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>btn btn-danger btn-sm<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Delete<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+            @endforeach
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+@endsection
+</code></pre>
+<p>Â </p>
+<p>Second, <strong>create.blade.php</strong> for our uploading file.</p>
+<pre class=" language-markup" tabindex="0"><code class=" language-markup">@extends('layouts.app-master')
+
+@section('content')
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bg-light p-5 rounded<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>Add file<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+        
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{ route(<span class="token punctuation">'</span>files.store<span class="token punctuation">'</span>) }}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">enctype</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>multipart/form-data<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            @include('layouts.partials.messages')
+            @csrf
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>form-group mt-4<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>form-control<span class="token punctuation">"</span></span> <span class="token attr-name">accept</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>.jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>w-100 btn btn-lg btn-primary mt-4<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Save<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+@endsection
+</code></pre>
+<p>Â </p>
+<p>As you can see from our <strong>input=file</strong> we added <strong>accept</strong> attribute with a value of <em>".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip"</em> it will help to only accept base on specified file extensions.</p>
+<p style="text-align: center;">Â </p>
+<p style="text-align: center;"><a class="action-button mx-2 text-base inline-flex items-center justify-center text-white font-medium rounded-lg shadow-sm hover:shadow-lg py-3 px-5 border border-transparent transform hover:-translate-y-0.5 transition-all duration-150 bg-blue-700" href="https://github.com/codeanddeploy/laravel-8-file-upload" target="_blank" rel="nofollow noopener" data-type="success">Download Source Code</a></p>
+<p style="text-align: center;">Â </p>
+<p>Thank you for reading. I hope it helps.</p>
+<p>Â </p>
+<p>Happy coding :)</p></div>
+                            <div id="-bottom-"></div>
+                        </div>
+                        <div class="bybit-ad">
+                            <a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=list-content" rel="nofollow" target="_blank"><img src="./Laravel 9 File Upload Example_files/BYBIT-CONTENT.png" class="mt-8 blog-ads-envato-img"></a>
+                        </div>
+                        
+                        
+                                                    <div class="mt-8">
+                                <div class="border-b pb-2">
+                                    <p class="text-xl font-semibold">Read next</p>
+                                </div>
+                                <ul class="mt-2">
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/combine-the-nwidart-laravel-modules-assets-to-public-using-laravel-mix">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">Combine the Nwidart Laravel Modules Assets to Public using Laravel Mix</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">1 minute to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/laravel-8-authentication-login-and-registration-with-username-or-email">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">Laravel 9 Auth Login and Registration with Username or Email</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">17 minutes to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-add-remember-me-functionality-to-your-laravel-8-login">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">How To Add Remember Me Functionality To Your Laravel 9 Login?</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">2 minutes to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-implement-remember-me-with-custom-expiration-to-your-laravel-8-login">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">How To Implement Remember Me with Custom Expiration To Your Laravel 8 Login?</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">2 minutes to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/laravel-8-logout-for-your-authenticated-user">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">Laravel 9 Logout For Your Authenticated User</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">less than a minute to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-implement-laravel-8-email-verification">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">How To Implement Laravel 9 Email Verification?</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">5 minutes to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-change-the-laravel-redirect-url-when-not-authenticated">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">How To Change The Laravel Redirect URL When Not Authenticated?</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">less than a minute to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                            <li class="mb-2">
+                                            <div class="flex items-center rounded-xl hover:bg-gray-200 px-3 py-2 transition duration-150 ease-in-out">
+                                                <div class="flex items-center justify-center rounded-md w-24 mr-4">
+                                                    <div class="flex items-center justify-center bg-gray-200 w-full h-16 rounded-md">
+                                                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full">
+                                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-queue-the-laravel-8-email-verification">
+                                                        <div>
+                                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600 w-full line-clamp-2 transition duration-150 ease-in-out">How To Queue the Laravel 9 Email Verification?</span>
+                                                            <div class="flex items-center text-gray-400">
+                                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="text-sm font-semibold">3 years ago</span>
+                                                                <span class="ml-auto text-gray-500 font-semibold text sm">1 minute to read</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                                    </ul>
+                            </div>
+                        
+                                                <div class="bybit-ad">
+                            <a href="https://codeanddeploy.com/dofree100?utm_source=codeanddeploy&amp;utm_medium=blog-content&amp;utm_id=do100freecredit" target="_blank" rel="nofollow">
+                        <img class="banner-blog-content footer" src="./Laravel 9 File Upload Example_files/digitalocean-ad-800x200.png" alt="Code And Deploy Banner">
+                        </a>
+                        </div>
+                        
+                                            </div>
+                </div>
+            </article>
+            <aside class="row-start-2 col-span-12 xl:row-start-1 xl:col-span-3 xl:block mt-8 xl:mt-0 lg:ml-2 transition duration-150 ease-in-out">
+                
+                <div class="w-full h-full relative lg:pt-4 lg:px-4 pb-6 lg:mt-6">
+                    
+                                            <div class="border rounded-xl p-2 text-gray-900 mb-6">
+                            <div class="border-b px-3 pb-2 mb-2 flex items-center">
+                                <svg class="h-5 w-5 mr-1 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path>
+                                </svg>
+                                <p class="text-lg font-semibold">Popular posts</p>
+                            </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/laravel-9-cron-job-task-scheduling-with-example">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">Laravel 9 Cron Job Task Scheduling with Example</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 2 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/laravel-collection-sort-tutorial-with-example">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">Laravel Collection Sort Tutorial with Example</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 2 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/laravel-8-query-log-example">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">Laravel 8 Query Log Example</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 2 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-generate-barcode-in-laravel-8">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">How to Generate Barcode in Laravel 8?</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 2 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-add-default-eloquent-model-values-on-laravel-8">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">How to add Default Eloquent Model Values on Laravel 8?</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 2 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/laravel-8-user-roles-and-permissions-step-by-step-tutorial">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">Laravel 9 User Roles and Permissions Step by Step Tutorial</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 2 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/php/edit-or-update-data-with-bootstrap-modal-in-php-mysql-using-ajax">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">Edit or Update Data with Bootstrap Modal in PHP &amp; MySQL Using Ajax</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 2 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/php/how-to-return-json-response-in-php-mysql-using-ajax-and-jquery">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">How To Return JSON Response in PHP &amp; MySQL using Ajax and jQuery</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 3 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/how-to-get-file-size-on-uploaded-file-in-laravel-8">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">How to Get File Size on Uploaded file in Laravel 8?</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 4 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/laravel/building-secured-php-restful-api-in-laravel-8-with-sanctum">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">Laravel Sanctum: Building Secured PHP Restful API</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 6 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/jquery/force-html5-form-validation-using-button-on-click-in-jquery">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">Force HTML5 Form Validation using Button on Click in jQuery</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 7 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out">
+                                    <a href="https://codeanddeploy.com/blog/php/how-to-install-php-gd-extension-on-windows-wamp-and-xampp-server">
+                                        <div>
+                                            <span class="text-gray-700 block font-semibold text-base hover:text-blue-600">How to Install PHP GD Extension on Windows WAMP and XAMPP Server</span>
+                                            <div class="flex items-center text-gray-400">
+                                                <svg class="h-3 w-3 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="text-sm font-semibold">last read 11 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                    </div>
+                    
+                                        <div class="banner-sidebar border rounded-xl p-2 text-gray-900 mb-6">
+                        <div class="border-b px-3 pb-2 mb-2 flex items-center">
+                            <svg class="h-5 w-5 mr-1 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path>
+                            </svg>
+                            <p class="text-lg font-semibold">Try It Now</p>
+                        </div>
+                        <div class="leading-5 mb-2 rounded-lg px-3 py-2 hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out bybit-ad">
+                            <a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=sidebar-content" target="_blank" rel="nofollow">
+                                <img src="./Laravel 9 File Upload Example_files/bybit-sidebar.png" alt="Code And Deploy Banner">
+                            </a>
+                        </div>
+                    </div>
+                                    </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- ByBit Ad Modal -->
+    <div class="modal hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex justify-center items-center" id="bybit-ad-modal">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 modal-overlay"></div>
+            <div class="relative bg-white rounded-lg px-4 py-6">
+                <div class="absolute top-0 right-0 pt-4 pr-4">
+                    <button class="text-gray-500 hover:text-gray-700 focus:outline-none close-modal-ad" aria-label="Close">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-3 text-center sm:mt-0 sm:text-left">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Sponsor</h3>
+                    <div class="mt-2 bybit-ad">
+                        <p class="text-sm text-gray-500"><a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=modal-content" target="_blank" rel="nofollow"><img src="./Laravel 9 File Upload Example_files/modal-ad.jpg"></a></p>
+                    </div>
+                </div>
+                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse bybit-ad">
+                    <button class="w-full justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-bold text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
+                        <a href="https://codeanddeploy.com/bybit?utm_source=codeanddeploy&amp;utm_medium=modal-content" target="_blank" rel="nofollow">GET FREE CRYPTO NOW!</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+</main><!-- End #main -->
+
+<footer id="footer" class="bg-head-900 text-white">
+    
+    <div class="mt-6 py-6 max-w-6xl lg:mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="flex items-center justify-betwee md:items-start flex-col">
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="h-9" src="./Laravel 9 File Upload Example_files/logo.png" alt="Code And Deploy Logo">
+                </div>
+                <div class="md:w-full mt-4">
+                    <p class="w-96 md:w-full text-white text-base text-center md:text-left leading-7">
+                        Provides a programming tutorial for aspiring web &amp; software developers to help them understand PHP, Laravel Framework, CSS3, HTML5, MySQL, Bootstrap, and many more. We hope that our tutorials can help you grow your career as a programmer.
+                    </p>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="w-96 mx-auto md:ml-auto text-white flex justify-between flex-col md:flex-row">
+                    <div class="about">
+                        <p class="uppercase font-bold text-base mb-2 text-center md:text-left">About</p>
+                        <ul class="flex flex-row md:flex-col justify-evenly">
+                            <li><a href="https://codeanddeploy.com/about" class="font-semibold text-base block mb-2 text-gray-300 text-opacity-60 hover:text-white transition duration-150 ease-in-out">About Us</a></li>
+                            <li><a href="https://codeanddeploy.com/contact" class="font-semibold text-base block mb-2 text-gray-300 text-opacity-60 hover:text-white transition duration-150 ease-in-out">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="term mt-2 md:mt-0">
+                        <p class="uppercase font-bold text-base mb-2 text-center md:text-left">Other Pages</p>
+                        <ul class="flex flex-row md:flex-col justify-evenly">
+                            <li><a href="https://codeanddeploy.com/terms" class="font-semibold text-base block mb-2 text-gray-300 text-opacity-60 hover:text-white transition duration-150 ease-in-out">Terms of Service</a></li>
+                            <li><a href="https://codeanddeploy.com/disclaimer" class="font-semibold text-base block mb-2 text-gray-300 text-opacity-60 hover:text-white transition duration-150 ease-in-out">Disclaimer</a></li>
+                            <li><a href="https://codeanddeploy.com/privacy" class="font-semibold text-base block mb-2 text-gray-300 text-opacity-60 hover:text-white transition duration-150 ease-in-out">Privacy Policy</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright mt-6 text-xs flex flex-col border-t border-gray-300 border-opacity-20 pt-3">
+            <div class="flex-1 text-center">Copyright © 2025 <strong><span>Code And Deploy</span></strong>. All Rights Reserved.</div>
+        </div>
+    </div>
+</footer>
+
+		</div>
+
+		<div id="overlay" class="fixed z-50 inset-0 overflow-y-auto transition duration-300 ease-in-out" aria-labelledby="LeaveCreateBlogPage" role="dialog" aria-modal="true" style="display: none;">
+  	<div class="flex items-center bg-black bg-opacity-50 justify-center min-h-screen">
+        <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-black bg-opacity-50">
+            <svg class="animate-spin h-7 w-7 text-white" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+
+		<!-- Vendor JS Files -->
+<script src="./Laravel 9 File Upload Example_files/jquery.bs.min.js"></script>
+<script src="./Laravel 9 File Upload Example_files/plugins.min.js"></script>
+
+
+
+    <script>
+        var ARTICLE = {
+    "id": 44,
+    "user_id": 1,
+    "title": "Laravel 9 File Upload Example",
+    "body": "<p>In this post, I will be going to share how to implement a simple <strong>Laravel 9 file upload <\/strong>with a database implementation. We will save the generated file name base on time, size, and mime-type, and associate it with the current user logged. When developing an application using Laravel usually the file upload is always present even on a simple system.<\/p>\n<p>\u00c2\u00a0<\/p>\n<p><img src=\"https:\/\/ecn-storage.s3.us-west-2.amazonaws.com\/articles\/laravel-8-file-upload-example-fgxryTfFbjx980.webp?ctm=1630415897\" alt=\"laravel file upload\" width=\"980\" height=\"352\" \/><\/p>\n<p>\u00c2\u00a0<\/p>\n<p><img src=\"https:\/\/ecn-storage.s3.us-west-2.amazonaws.com\/articles\/laravel-8-file-upload-example-E7tKG23k68x980.webp?ctm=1630415856\" alt=\"laravel file upload\" width=\"980\" height=\"256\" \/><\/p>\n<p>\u00c2\u00a0<\/p>\n<p><img src=\"https:\/\/ecn-storage.s3.us-west-2.amazonaws.com\/articles\/laravel-8-file-upload-example-QAUNVSwSASx980.webp?ctm=1630416034\" alt=\"laravel file upload\" width=\"980\" height=\"428\" \/><\/p>\n<p>\u00c2\u00a0<\/p>\n<p>Just follow my simple steps and learn from them.<\/p>\n<p>\u00c2\u00a0<\/p>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"km1aRfYpR2Qu9HcHEi51DMRgx\" class=\"text-3xl article-section-title font-semibold mb-4\" contenteditable=\"false\">Laravel File Upload<\/h2>\n<p>I assume that you have your <strong>Laravel 9 Project<\/strong> already in your local so we will skip that process. For more information on how to install Laravel just visit their <a title=\"https:\/\/laravel.com\/docs\/8.x\" href=\"https:\/\/laravel.com\/docs\/8.x\">documentation<\/a>.<\/p>\n<p>\u00c2\u00a0<\/p>\n<p>Okay, let's start.<\/p>\n<p>\u00c2\u00a0<\/p>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"VMtK75PCqCqUMUTAw8gSRin6S\" class=\"text-3xl article-section-title font-semibold mb-4\" contenteditable=\"false\">Step 1: Create file upload migrations<\/h2>\n<p>First, we will create our file table migrations for our File model. Run the following command to do it:<\/p>\n<pre class=\"language-markup\"><code>php artisan make:migration create_files_table<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<p>Then we will add our migrations field. See below the complete code for our migrations.<\/p>\n<pre class=\"language-php\"><code>&lt;?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nclass CreateFilesTable extends Migration\n{\n    \/**\n     * Run the migrations.\n     *\n     * @return void\n     *\/\n    public function up()\n    {\n        Schema::create('files', function (Blueprint $table) {\n            $table-&gt;id();\n            $table-&gt;unsignedBigInteger('user_id');\n            $table-&gt;string('name');\n            $table-&gt;string('type');\n            $table-&gt;string('size');\n            $table-&gt;timestamps();\n\n            $table-&gt;foreign('user_id')\n                -&gt;references('id')\n                -&gt;on('users')\n                -&gt;onDelete('cascade');\n        });\n    }\n\n    \/**\n     * Reverse the migrations.\n     *\n     * @return void\n     *\/\n    public function down()\n    {\n        Schema::dropIfExists('files');\n    }\n}\n<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<p>Next, you have to run:<\/p>\n<pre class=\"language-markup\"><code>php artisan migrate<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"GDyaPafy7NfKlG3zPvrj2oX2s\" class=\"text-3xl article-section-title font-semibold mb-4\" contenteditable=\"false\">Step 2: Create file upload controller and model<\/h2>\n<p>Use the command below to create your FileController with the <code>File<\/code> model:<\/p>\n<pre class=\"language-markup\"><code>php artisan make:controller FilesController --model=File<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"yberrlQ8i6blVE7n8SBGSsvzv\" class=\"text-3xl article-section-title font-semibold mb-4\">Step 3: Create Laravel file upload routes<\/h2>\n<p>Now, let's create your routes for our Laravel file upload:<\/p>\n<pre class=\"language-markup\"><code>\/**\n* File Upload Routes\n*\/\nRoute::get('\/files', 'FilesController@index')-&gt;name('files.index');\nRoute::get('\/files\/add', 'FilesController@create')-&gt;name('files.create');\nRoute::post('\/files\/add', 'FilesController@store')-&gt;name('files.store');<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"vO2A9GCOS32O88zPvgy3IQ3Jr\" class=\"text-3xl article-section-title font-semibold mb-4\" contenteditable=\"false\">Step 4: Setup Model<\/h2>\n<p>Next, we will set up our <code>File<\/code> model. See below the completed setup.<\/p>\n<pre class=\"language-php\"><code>&lt;?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass File extends Model\n{\n\n    protected $table = 'files';\n\n    protected $fillable = [\n        'user_id',\n        'name',\n        'type',\n        'size'\n    ];\n\n    use HasFactory;\n}\n<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"vPC9xSGUeJ55X3BbRsVdmRqi8\" class=\"text-3xl article-section-title font-semibold mb-4\" contenteditable=\"false\">Step 5: Setup Controller<\/h2>\n<p>Kindly see below the complete code of our controller including the file upload in <strong>store()<\/strong> method.<\/p>\n<pre class=\"language-php\"><code>&lt;?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Models\\File;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Http\\UploadedFile;\nuse App\\Http\\Requests\\StoreFileRequest;\n\nclass FilesController extends Controller\n{\n    \/**\n     * Display a listing of the resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     *\/\n    public function index()\n    {\n        $files = File::all();\n\n        return view('files.index', [\n            'files' =&gt; $files\n        ]);\n    }\n\n    \/**\n     * Show the form for creating a new resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     *\/\n    public function create()\n    {\n        return view('files.create');\n    }\n\n    \/**\n     * Store a newly created resource in storage.\n     *\n     * @param  StoreFileRequest  $request\n     * @return \\Illuminate\\Http\\Response\n     *\/\n    public function store(StoreFileRequest $request)\n    {\n        $fileName = auth()-&gt;id() . '_' . time() . '.'. $request-&gt;file-&gt;extension();  \n\n        $type = $request-&gt;file-&gt;getClientMimeType();\n        $size = $request-&gt;file-&gt;getSize();\n\n        $request-&gt;file-&gt;move(public_path('file'), $fileName);\n\n        File::create([\n            'user_id' =&gt; auth()-&gt;id(),\n            'name' =&gt; $fileName,\n            'type' =&gt; $type,\n            'size' =&gt; $size\n        ]);\n\n        return redirect()-&gt;route('files.index')-&gt;withSuccess(__('File added successfully.'));\n    }\n\n}\n<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"DgDsY5elpaxdUDXDYaKXT3Grj\" class=\"text-3xl article-section-title font-semibold mb-4\" contenteditable=\"false\">Step 6: Create StoreFileRequest<\/h2>\n<p>Now let's create a request class for a <code>store\/uploading<\/code> file. Run the command below:<\/p>\n<pre class=\"language-markup\"><code>php artisan make:request StoreFileRequest<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<p>After the <strong>StoreFileRequest<\/strong> class is generated kindly check the code below for our validation:<\/p>\n<pre class=\"language-php\"><code>&lt;?php\n\nnamespace App\\Http\\Requests;\n\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass StoreFileRequest extends FormRequest\n{\n    \/**\n     * Determine if the user is authorized to make this request.\n     *\n     * @return bool\n     *\/\n    public function authorize()\n    {\n        return true;\n    }\n\n    \/**\n     * Get the validation rules that apply to the request.\n     *\n     * @return array\n     *\/\n    public function rules()\n    {\n        return [\n            'file' =&gt; 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip'\n        ];\n    }\n}\n<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<h2 id=\"ssVex0zeJkcoRyAEuGhe4sccc\" class=\"text-3xl article-section-title font-semibold mb-4\" contenteditable=\"false\">Step 7: Create View<\/h2>\n<p>First, we will create our <strong>index.blade.php<\/strong> see below the complete code:<\/p>\n<pre class=\"language-markup\"><code>@extends('layouts.app-master')\n\n@section('content')\n    &lt;div class=\"bg-light p-5 rounded\"&gt;\n        &lt;h1&gt;Files&lt;\/h1&gt;\n        &lt;a href=\"{{ route('files.create') }}\" class=\"btn btn-primary float-right mb-3\"&gt;Add file&lt;\/a&gt;\n\n        @include('layouts.partials.messages')\n\n        &lt;table class=\"table table-striped\"&gt;\n          &lt;thead&gt;\n            &lt;tr&gt;\n              &lt;th scope=\"col\"&gt;#&lt;\/th&gt;\n              &lt;th scope=\"col\"&gt;Name&lt;\/th&gt;\n              &lt;th scope=\"col\"&gt;Size&lt;\/th&gt;\n              &lt;th scope=\"col\"&gt;Type&lt;\/th&gt;\n              &lt;th scope=\"col\"&gt;Action&lt;\/th&gt;\n            &lt;\/tr&gt;\n          &lt;\/thead&gt;\n          &lt;tbody&gt;\n            @foreach($files as $file)\n              &lt;tr&gt;\n                &lt;td width=\"3%\"&gt;{{ $file-&gt;id }}&lt;\/td&gt;\n                &lt;td&gt;{{ $file-&gt;name }}&lt;\/td&gt;\n                &lt;td width=\"10%\"&gt;{{ $file-&gt;size }}&lt;\/td&gt;\n                &lt;td width=\"10%\"&gt;{{ $file-&gt;type }}&lt;\/td&gt;\n                &lt;td width=\"5%\"&gt;&lt;a href=\"{{ $file-&gt;type }}\" class=\"btn btn-danger btn-sm\"&gt;Delete&lt;\/a&gt;&lt;\/td&gt;\n              &lt;\/tr&gt;\n            @endforeach\n          &lt;\/tbody&gt;\n        &lt;\/table&gt;\n    &lt;\/div&gt;\n@endsection\n<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<p>Second, <strong>create.blade.php<\/strong> for our uploading file.<\/p>\n<pre class=\"language-markup\"><code>@extends('layouts.app-master')\n\n@section('content')\n    &lt;div class=\"bg-light p-5 rounded\"&gt;\n        &lt;h1&gt;Add file&lt;\/h1&gt;\n        \n        &lt;form action=\"{{ route('files.store') }}\" method=\"post\" enctype=\"multipart\/form-data\"&gt;\n            @include('layouts.partials.messages')\n            @csrf\n            &lt;div class=\"form-group mt-4\"&gt;\n              &lt;input type=\"file\" name=\"file\" class=\"form-control\" accept=\".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip\"&gt;\n            &lt;\/div&gt;\n\n            &lt;button class=\"w-100 btn btn-lg btn-primary mt-4\" type=\"submit\"&gt;Save&lt;\/button&gt;\n        &lt;\/form&gt;\n\n    &lt;\/div&gt;\n@endsection\n<\/code><\/pre>\n<p>\u00c2\u00a0<\/p>\n<p>As you can see from our <strong>input=file<\/strong> we added <strong>accept<\/strong> attribute with a value of <em>\".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip\"<\/em> it will help to only accept base on specified file extensions.<\/p>\n<p style=\"text-align: center;\">\u00c2\u00a0<\/p>\n<p style=\"text-align: center;\"><a class=\"action-button mx-2 text-base inline-flex items-center justify-center text-white font-medium rounded-lg shadow-sm hover:shadow-lg py-3 px-5 border border-transparent transform hover:-translate-y-0.5 transition-all duration-150 bg-blue-700\" href=\"https:\/\/github.com\/codeanddeploy\/laravel-8-file-upload\" target=\"_blank\" rel=\"nofollow noopener\" data-type=\"success\">Download Source Code<\/a><\/p>\n<p style=\"text-align: center;\">\u00c2\u00a0<\/p>\n<p>Thank you for reading. I hope it helps.<\/p>\n<p>\u00c2\u00a0<\/p>\n<p>Happy coding :)<\/p>",
+    "visible_date": 1747225162,
+    "handle": "laravel-8-file-upload-example",
+    "created_at": "2021-08-31T13:22:16.000000Z",
+    "article_updated_at": "2022-06-14 13:31:16",
+    "updated_at": "2025-05-14T12:19:22.000000Z",
+    "category_id": 2,
+    "summary": "In this post, I will be going to share how to implement a simple Laravel 9 file upload with a database implementation. We will save the generated file name base on time, size, and mime-type, and associate it with the current user logged. When developing an application using Laravel usually the file upload is always present even on a simple system.",
+    "view_count": 18109,
+    "last_read": 1747225162,
+    "ert": "5 minutes to read",
+    "image": {
+        "id": 147,
+        "article_id": 44,
+        "src": "https:\/\/ecn-storage.s3.us-west-2.amazonaws.com\/articles\/laravel-8-file-upload-examplex980.webp",
+        "altText": "laravel file upload",
+        "type": "full"
+    },
+    "date": "3 years ago",
+    "tags": [
+        {
+            "id": 22,
+            "name": "laravel 8",
+            "pivot": {
+                "taggable_type": "Modules\\Blog\\Entities\\Article",
+                "taggable_id": 44,
+                "tag_id": 22
+            }
+        },
+        {
+            "id": 1,
+            "name": "PHP",
+            "pivot": {
+                "taggable_type": "Modules\\Blog\\Entities\\Article",
+                "taggable_id": 44,
+                "tag_id": 1
+            }
+        }
+    ],
+    "images": [
+        {
+            "id": 147,
+            "article_id": 44,
+            "src": "https:\/\/ecn-storage.s3.us-west-2.amazonaws.com\/articles\/laravel-8-file-upload-examplex980.webp",
+            "altText": "laravel file upload",
+            "type": "full"
+        },
+        {
+            "id": 148,
+            "article_id": 44,
+            "src": "https:\/\/ecn-storage.s3.us-west-2.amazonaws.com\/articles\/laravel-8-file-upload-examplex300.webp",
+            "altText": "laravel file upload",
+            "type": "thumbnail"
+        }
+    ],
+    "seo": {
+        "id": 44,
+        "article_id": 44,
+        "title": "Laravel 9 File Upload Example",
+        "description": "I will be going to share how to implement a simple Laravel 9 file upload with a database implementation. And we will associate the file with the current user login."
+    }
+};
+
+        $(document).ready(function() {
+            $('a').click(function(event) {
+                if ($(this).prop('rel') === 'next') {
+
+                } else if($(this).prop('rel') === 'prev') {
+
+                } else {
+                    if ($(this).closest('#TableOfContentsMobile').length < 1 && $(this).closest('#TableOfContents').length < 1 && $(this).closest('.bybit-ad').length < 1) {
+
+                        event.preventDefault();
+                        var href = $(this).attr('href');
+                        $('.close-modal-ad').attr('data-href', href);
+                        $('#bybit-ad-modal').removeClass('hidden').addClass('flex');
+                        $('body').addClass('overflow-hidden');
+                    }
+                }
+            });
+
+            // Hide modal when close button or modal overlay is clicked
+            $('.close-modal-ad').click(function() {
+                $('#bybit-ad-modal').removeClass('flex').addClass('hidden');
+                $('body').removeClass('overflow-hidden');
+                window.location=$(this).attr('data-href');
+            });
+        });
+    </script>
+
+
+<!-- Modules Javascript Plugins -->
+                        <script src="./Laravel 9 File Upload Example_files/prism.js"></script>
+            
+<!-- Modules Javascript -->
+                        <script src="./Laravel 9 File Upload Example_files/blog_script.js"></script>
+            
+		<div class="js-cookie-consent cookie-consent fixed bottom-0 inset-x-0 pb-2">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="p-2 rounded-lg bg-yellow-100">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="w-0 flex-1 items-center hidden md:inline">
+                    <p class="ml-3 text-black cookie-consent__message">
+                        Your experience on this site will be improved by allowing cookies.
+                    </p>
+                </div>
+                <div class="mt-2 flex-shrink-0 w-full sm:mt-0 sm:w-auto">
+                    <button class="js-cookie-consent-agree cookie-consent__agree cursor-pointer flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium text-yellow-800 bg-yellow-400 hover:bg-yellow-300">
+                        Allow cookies
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+
+        window.laravelCookieConsent = (function () {
+
+            const COOKIE_VALUE = 1;
+            const COOKIE_DOMAIN = 'codeanddeploy.com';
+
+            function consentWithCookies() {
+                setCookie('laravel_cookie_consent', COOKIE_VALUE, 7300);
+                hideCookieDialog();
+            }
+
+            function cookieExists(name) {
+                return (document.cookie.split('; ').indexOf(name + '=' + COOKIE_VALUE) !== -1);
+            }
+
+            function hideCookieDialog() {
+                const dialogs = document.getElementsByClassName('js-cookie-consent');
+
+                for (let i = 0; i < dialogs.length; ++i) {
+                    dialogs[i].style.display = 'none';
+                }
+            }
+
+            function setCookie(name, value, expirationInDays) {
+                const date = new Date();
+                date.setTime(date.getTime() + (expirationInDays * 24 * 60 * 60 * 1000));
+                document.cookie = name + '=' + value
+                    + ';expires=' + date.toUTCString()
+                    + ';domain=' + COOKIE_DOMAIN
+                    + ';path=/'
+                    + ';samesite=lax';
+            }
+
+            if (cookieExists('laravel_cookie_consent')) {
+                hideCookieDialog();
+            }
+
+            const buttons = document.getElementsByClassName('js-cookie-consent-agree');
+
+            for (let i = 0; i < buttons.length; ++i) {
+                buttons[i].addEventListener('click', consentWithCookies);
+            }
+
+            return {
+                consentWithCookies: consentWithCookies,
+                hideCookieDialog: hideCookieDialog
+            };
+        })();
+    </script>
+
+	
+
+
+</body></html>

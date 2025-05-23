@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Repositories\Ticket;
+namespace App\Repositories\Status;
 
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-use App\Models\Ticket;
 use App\Models\Status;
 
 
 /**
- * Class TicketRepository.
+ * Class StatusRepository.
  */
-class TicketRepository extends BaseRepository
+class StatusRepository extends BaseRepository
 {
     /**
      * @return string
@@ -18,6 +17,6 @@ class TicketRepository extends BaseRepository
      */
     public function model()
     {
-        return Ticket::class;
+        return Status::class;
     }
 }

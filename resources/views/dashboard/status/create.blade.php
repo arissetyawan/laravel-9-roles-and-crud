@@ -5,14 +5,14 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-    <div class="card-header">{{ __('Kategori') }}</div>
+    <div class="card-header">{{ __('Status') }}</div>
     <div class="card-body">
 
-    <form method="POST" action="{{ Route('category/store') }}">
+    <form method="POST" action="{{ Route('status/store') }}">
         @csrf
         <div class="form-group">
           <label for="name">Nama</label>
-          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="Category name">
+          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="status name">
           @error('name')
           <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
           @enderror

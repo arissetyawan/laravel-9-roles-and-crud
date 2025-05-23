@@ -51,7 +51,7 @@
 </div>
 
 <script type="text/javascript">
-    setInterval(function() {location.reload()}, 100000)
+    setInterval(function() {location.reload(true)}, 100000)
 </script>
 
 @endsection

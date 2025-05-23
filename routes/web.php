@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\StatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +63,22 @@ Route::get('/edit/{id}', 'edit')->name('role/edit')->where('id','[0-9]+');
 Route::post('/update', 'update')->name('role/update')->where('id','[0-9]+');
 
 Route::get('/destroy/{id}', 'destroy')->name('role/destroy')->where('id','[0-9]+');
+
+});
+
+Route::middleware('auth')->controller(StatusController::class)->prefix("status")->group(function (){
+
+Route::get('/', 'index')->name('status');
+
+Route::get('/create', 'create')->name('status/create');
+
+Route::post('/store', 'store')->name('status/store');
+
+Route::get('/edit/{id}', 'edit')->name('status/edit')->where('id','[0-9]+');
+
+Route::post('/update', 'update')->name('status/update')->where('id','[0-9]+');
+
+Route::get('/destroy/{id}', 'destroy')->name('status/destroy')->where('id','[0-9]+');
 
 });
 
