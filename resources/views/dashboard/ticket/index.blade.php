@@ -51,6 +51,10 @@
         </div>
     </div>
 </div>
- 
+
+<script type="text/javascript">
+    setInterval(function() {location.reload()}, 100000)
+</script>
 
 @endsection
+
