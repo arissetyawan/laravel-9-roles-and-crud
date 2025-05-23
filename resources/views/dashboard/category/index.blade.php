@@ -13,10 +13,10 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col" class="col-1">#</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Deskripsi</th>
-                        <th scope="col" class="col-3">Action</th>
+                        <th scope="col" class="col-2" colspan="2">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,8 +27,10 @@
                         <td>{!! Str::words($category->description, 3, ' ...') !!}</td>
                         <td>
                         <a href="{{ Route('category/edit',$category->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                        <a href="{{ Route('category/destroy',$category->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                    </td>
+                        </td>
+                        <td>
+                        <a href="{{ Route('category/destroy',$category->id) }}" class="btn  btn-danger"><i class="fa fa-trash"></i></a>
+                        </td>
                     </tr>
                 @endforeach
                     </tbody>

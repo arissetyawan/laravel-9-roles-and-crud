@@ -13,10 +13,10 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" class="col-4">Deskripsi</th>
+                        <th scope="col" class="col-1">#</th>
+                        <th scope="col" class="col">Deskripsi</th>
                         <th scope="col" class="col-2">Kategori</th>
-                        <th scope="col" class="col-3">Action</th>
+                        <th scope="col" class="col-2" colspan="2">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,6 +27,8 @@
                         <td>{{ $ticket->category->name }}</td>
                         <td>
                         <a href="{{ Route('ticket/edit',$ticket->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                        </td>
+                        <td>
                         <a href="{{ Route('ticket/destroy',$ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>

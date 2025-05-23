@@ -13,10 +13,10 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
+                      <th scope="col" class="col-1">#</th>
                       <th scope="col">Nama</th>
                       <th scope="col">Deskripsi</th>
-                      <th scope="col" class="col-3">Action</th>
+                      <th scope="col" class="col-2" colspan="2">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -26,13 +26,15 @@
                       <td>{{ $role->name }}</td>
                       <td>{{ $role->description }}</td>
                       <td>
-                      @if($role->name!='admin')
-                      <a href="{{ Route('role/edit',$role->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                        @if($role->users()->count()==0)
+                        @if($role->name!='admin' && Auth::user()->role->name=='admin')
+                        <a href="{{ Route('role/edit',$role->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                        @endif
+                      </td>
+                      <td>
+                        @if($role->users()->count()==0 && $role->name!='admin' && Auth::user()->role=='admin')
                         <a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         @endif
-                      @endif
-                    </td>
+                      </td>
                     </tr>
                 @endforeach
                   </tbody>
