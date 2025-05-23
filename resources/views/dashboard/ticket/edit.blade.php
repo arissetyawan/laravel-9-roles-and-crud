@@ -78,20 +78,39 @@
         <button type="submit" class="btn btn-warning">Selesai</button>
         <hr />
         <div class="form-group">
-          <label for="priority_id">Umpang balik selesai</label><br />
-          @for ($i = 1; $i < 6; $i++)
-              @if($i<=$ticket->rating)
-              <i class="btn btn-outline-secondary fa fa-star feedback-star" style="font-size:  40px; color: gold" onclick="document.getElementById('rating').value={{$i}};"></i>
-              @else
-              <i class="btn btn-outline-secondary fa fa-star feedback-star" style="font-size:  40px; color: grey" onclick="document.getElementById('rating').value={{$i}};'"></i>
-              @endif
-            @endfor
-            <br />
-            <label for="description">Komentar Penyelesaian</label>
-            <textarea class="form-control @error('rating_comment') is-invalid @enderror" name="rating_comment" id="rating_comment" rows="3">{{ old('description') }}</textarea>
-            @error('rating_comment')
-            <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
-            @enderror
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Umpan balik selesai</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr><td>
+                    @for ($i = 1; $i < 6; $i++)
+                      @if($i<=$ticket->rating)
+                      <i class="btn btn-outline-secondary fa fa-star feedback-star" value='{{$i}}' style="font-size: 40px; color: gold" onclick="document.getElementById('rating').value={{$i}}; star(this, '.fa-star')"></i>
+                      @else
+                      <i class="btn btn-outline-secondary fa fa-star feedback-star" value='{{$i}}' style="font-size: 40px; color: grey" onclick="document.getElementById('rating').value={{$i}}; star(this, '.fa-star')"></i>
+                      @endif
+                    @endfor
+                  </td></tr>
+                </tbody>
+                <tfooter>
+                    <tr>
+                      <td>
+                        <label for="description">Komentar Penyelesaian</label>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <textarea class="form-control @error('rating_comment') is-invalid @enderror" name="rating_comment" id="rating_comment" rows="3">{{ $ticket->rating_comment }}</textarea>
+                        @error('rating_comment')
+                        <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
+                        @enderror
+                      </td>
+                    </tr>
+                </tfooter>
+              </table>
           <br />
           <button type="submit" class="btn btn-success">Terima kasih!</button>
         </div>
