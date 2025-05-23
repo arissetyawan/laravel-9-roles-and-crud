@@ -29,7 +29,8 @@
         <br />
         <div class="form-group">
           <label for="description">Kategori</label>
-          <select name="category_id"  id="category_id" class="form-control @error('category') is-invalid @enderror">
+          <select name="category_id"  id="category_id" required="true" class="form-control @error('category') is-invalid @enderror">
+              <option value="">-- Pilih Kategori --</option>
               @foreach($categories as $category)
                 <option @if($category->id == $ticket->category_id) selected @endif value="{{ $category->id }}">{{ $category->name }} </option>
             @endforeach
@@ -48,7 +49,8 @@
         <br />
         <div class="form-group">
           <label for="description">Petugas</label>
-          <select name="assigned_id"  id="assigned_id" class="form-control @error('assigned') is-invalid @enderror">
+          <select name="assigned_id"  id="assigned_id" class="form-control @error('assigned') is-invalid @enderror" required="true">
+              <option value="">-- Pilih Petugas --</option>
               @foreach($assigneds as $assigned)
                 <option @if($assigned->id == $ticket->assigned_id) selected @endif value="{{ $assigned->id }}">{{ $assigned->name }} </option>
             @endforeach

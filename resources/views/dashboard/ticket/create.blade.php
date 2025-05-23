@@ -24,7 +24,8 @@
         <br />
         <div class="form-group">
           <label for="description">Kategori</label>
-          <select name="category_id"  id="category_id" class="form-control @error('category') is-invalid @enderror">
+          <select name="category_id"  id="category_id" required="true" class="form-control @error('category') is-invalid @enderror">
+              <option value="">-- Pilih Kategori --</option>
               @foreach($categories as $category)
               <option value="{{ $category->id }}">{{ $category->name }} </option>
               @endforeach

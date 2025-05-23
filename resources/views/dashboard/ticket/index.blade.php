@@ -15,7 +15,6 @@
                     <tr>
                         <th scope="col" class="col-1">#</th>
                         <th scope="col" class="col">Detail</th>
-                        <th scope="col" class="col-2">Kategori</th>
                         <th scope="col" class="col-2">Petugas</th>
                         <th scope="col" class="col-2" colspan="2">Action</th>
                     </tr>
@@ -24,8 +23,7 @@
                     @foreach($tickets as $ticket)
                      <tr class="{{$ticket->get_class()}}" title="{{$ticket->priority->name}}" >
                         <td>{{ $loop->index+1 }}</td>
-                        <td>{!! Str::limit($ticket->description, 15, ' ...') !!}&nbsp;<b><sup>{{ $ticket->get_status_name() }}</b></sup></b></td>
-                        <td>{{ $ticket->category->name }}</td>
+                        <td><b>{{ $ticket->category->name }}:</b> {!! Str::limit($ticket->description, 15, ' ...') !!}&nbsp;<b><sup>{{ $ticket->get_status_name() }}</b></sup></b></td>
                         <td>{{ $ticket->get_assigned_name() }}</td>
                         <td>
                         <a href="{{ Route('ticket/edit',$ticket->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
