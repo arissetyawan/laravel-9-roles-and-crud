@@ -16,6 +16,7 @@
                         <th scope="col" class="col-1">#</th>
                         <th scope="col" class="col">Deskripsi</th>
                         <th scope="col" class="col-2">Kategori</th>
+                        <th scope="col" class="col-2">Dibuat</th>
                         <th scope="col" class="col-2" colspan="2">Action</th>
                     </tr>
                     </thead>
@@ -25,11 +26,14 @@
                         <td>{{ $ticket->id }}</td>
                         <td>{!! Str::words($ticket->description, 3, ' ...') !!}</td>
                         <td>{{ $ticket->category->name }}</td>
+                        <td>{{ $ticket->created_at->toDateTimeString() }}</td>
                         <td>
                         <a href="{{ Route('ticket/edit',$ticket->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         </td>
                         <td>
+                        @if(Auth::user()->role->name=='admin')
                         <a href="{{ Route('ticket/destroy',$ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        @endif
                         </td>
                     </tr>
                 @endforeach

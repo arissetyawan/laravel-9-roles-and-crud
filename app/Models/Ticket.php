@@ -14,7 +14,7 @@ class Ticket extends Model
      *
      * @var array
      */
-    protected $fillable = ['status_id','description','category_id','reporter_id', 'assigned_id', 'priority_id'];
+    protected $fillable = ['status_id','description','category_id','reporter_id', 'assigned_id', 'priority_id','rating', 'rating_comment'];
 
     /**
      * Get the user.
@@ -32,7 +32,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(Priority::class);
     }
-
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
     public function reporter_name()
     {
         $user = User::find($this->reporter_id);
@@ -48,5 +51,10 @@ class Ticket extends Model
         }else{
             return '#f00';
         }
+    }
+
+    public function get_status_name()
+    {
+       return ($this->status==null? '-' : $this->status->name);
     }
 }

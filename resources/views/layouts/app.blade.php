@@ -54,7 +54,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->name }} ({{Auth::user()->role->name}})
                                 </a>
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -64,10 +64,12 @@
                                         {{ __('Tiket') }}
                                   </a>
                                 @endif
-                                @can('is_admin')
+                                @can('is_perangkat')
                                   <a class="dropdown-item" href="{{ route('ticket') }}">
                                         {{ __('Tiket') }}
                                   </a>
+                                @endif
+                                @can('is_admin')
                                     <a class="dropdown-item" href="{{ route('category') }}">
                                         {{ __('Kategori') }}
                                     </a>

@@ -34,5 +34,15 @@ class AuthServiceProvider extends ServiceProvider
         {
             return $user->role->name == 'user';
         });
+
+        Gate::define('is_rt',function ($user)
+        {
+            return $user->role->name == 'rt';
+        });
+
+        Gate::define('is_perangkat',function ($user)
+        {
+            return $user->role->name == 'perangkat';
+        });
     }
 }
