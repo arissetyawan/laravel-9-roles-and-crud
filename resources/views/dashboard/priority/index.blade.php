@@ -21,7 +21,7 @@
                     <tbody>
                     @foreach($prioritys as $priority)
                     <tr>
-                        <th scope="row">{{ $priority->id }}</th>
+                        <td>{{ $loop->index+1 }}</td>
                         <td>{{ $priority->name }}</td>
                         <td>
                         <a href="{{ Route('priority/edit',$priority->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td><td>
