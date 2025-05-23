@@ -24,7 +24,7 @@
                     @foreach($tickets as $ticket)
                      <tr class="{{$ticket->get_class()}}" title="{{$ticket->priority->name}}" >
                         <td>{{ $ticket->id }}</td>
-                        <td>{!! Str::limit($ticket->description, 15, ' ...') !!}<up> <b>{{ $ticket->get_status_name() }}</b></up></td>
+                        <td>{!! Str::limit($ticket->description, 15, ' ...') !!}&nbsp;<b><sup>{{ $ticket->get_status_name() }}</b></sup></b></td>
                         <td>{{ $ticket->category->name }}</td>
                         <td>{{ $ticket->get_assigned_name() }}</td>
                         <td>
