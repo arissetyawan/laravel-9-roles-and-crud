@@ -65,6 +65,11 @@
                                         {{ __('Tiket') }}
                                   </a>
                                 @endif
+                                @can('is_rt')
+                                  <a class="dropdown-item" href="{{ route('ticket') }}">
+                                        {{ __('Tiket') }}
+                                  </a>
+                                @endif
                                 @can('is_perangkat')
                                   <a class="dropdown-item" href="{{ route('ticket') }}">
                                         {{ __('Tiket') }}

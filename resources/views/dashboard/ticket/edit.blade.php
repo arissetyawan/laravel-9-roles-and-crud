@@ -74,6 +74,8 @@
           @enderror
         </div>
         <br />
+        <a class="btn btn-success" onclick="window.history.back();"><i class="fa fa-chevron-left"></i>&nbsp;Kembali</a>
+         @if((Auth::user()->role->name=='rt' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
         <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="submit" class="btn btn-warning">Tiket Selesai Dikerjakan</button>
         <hr />
@@ -111,30 +113,29 @@
                     </tr>
                 </tfooter>
               </table>
-          <br />
           <button type="submit" class="btn btn-success">Terima kasih!</button>
         </div>
-        <br />
-      </form>
+        @endif
 
+     </form>
 
+     @if((Auth::user()->role->name=='rt' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
      <div class="form-group">
       <div class="bg-light p-5 rounded">
-        <b>Sertakan Berkas Gambar</b>
-
+        <b>Sertakan Berkas Gambar (Jika Perlu)</b>
         <form action="{{ '/' }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group mt-4">
               <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
             </div>
-
             <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Kirim</button>
         </form>
       </div>
     </div>
     <br />
+    @endif
 
-     <div class="form-group">
+     <div class="form-group"><br />
         <b>Riwayat</b>
         <ul>
           <li>
