@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                     @foreach($prioritys as $priority)
-                    <tr>
+                     <tr class="{{$priority->get_class()}}" title="{{$priority->name}}" >
                         <td>{{ $loop->index+1 }}</td>
                         <td>{{ $priority->name }}</td>
                         <td>

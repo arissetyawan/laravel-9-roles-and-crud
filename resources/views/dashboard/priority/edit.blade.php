@@ -24,7 +24,7 @@
           <label for="name">Name</label>
           <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ $priority->name }}" placeholder="name">
         </div>
-
+        <br />
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 

@@ -18,7 +18,7 @@
           <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
           @enderror
         </div>
-
+        <br />
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
         </div>
