@@ -93,7 +93,10 @@ class TicketController extends Controller
     {
         $ticket = Ticket::find($request['id']);
         if($request['assigned_id']!=null && $ticket->status_id==1){
-            $request['status_id'] = 2;
+            $request['status_id'] = 2; //sedang dikerjakan
+        }
+        if($request['assigned_id']!=null && $ticket->status_id==2 && $request['btn']=='Tiket Selesai Dikerjakan'){
+            $request['status_id'] = 4; //selesai
         }
         $this->ticketRepository->updateById($request->id,$request->except('id'));
         toast('Tiket berhasil diperbarui!','success');

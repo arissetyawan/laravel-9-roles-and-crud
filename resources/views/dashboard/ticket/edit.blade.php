@@ -78,8 +78,8 @@
         <br />
         <a class="btn btn-success" onclick="window.history.back();"><i class="fa fa-chevron-left"></i>&nbsp;Kembali</a>
          @if((Auth::user()->role->name=='rt' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="submit" class="btn btn-warning">Tiket Selesai Dikerjakan</button>
+        <input name='btn' type="submit" class="btn btn-primary" value="Simpan">
+        <input name='btn' type="submit" class="btn btn-warning" value="Tiket Selesai Dikerjakan">
         <hr />
         <div class="form-group">
             <table class="table table-hover">
