@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
+<center>
+<h5>Selamat Datang, <b>{{Auth::user()->name}}</b></h5>
+</center>
 <div class="container">
-
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
