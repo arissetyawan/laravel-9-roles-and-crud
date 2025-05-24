@@ -28,7 +28,7 @@
                             <td>{{ $user['ticket'] }}</td>
                             <td>{{ $user['min_rating'] }}</td>
                             <td>{{ $user['max_rating'] }}</td>
-                            <td>{{ $user['rating'] }}  ({{ $user['rating_percentage'] }})</td>
+                            <td>{{ $user['rating'] }}  ({{ $user['rating_percentage'] }}%)</td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -44,13 +44,13 @@ class HomeController extends Controller
             $users->push(['ticket' => $user->get_ticket(), 'rating' => $user->get_rating(), 'name' => $user->name, 'min_rating' => $user->get_min_rating(), 'max_rating'=>$user->get_max_rating(), 'rating_percentage' => round((($user->get_rating()/$total)*100), 2)]);
         }
         $users = $users->sortByDesc('rating');
-        $tickets_assigned = $this->ticketRepository->where('assigned_id','=', Auth::user()->id)->orderBy("updated_at", 'desc');
-        $tickets_assigned = $tickets_assigned->paginate(2,['*'],'page');
-        $counter_assigned = $tickets_assigned->count();
+        $tickets_assigned_raw = Ticket::where('assigned_id','=', Auth::user()->id)->orderBy("updated_at", 'desc');
+        $counter_assigned = $tickets_assigned_raw->get()->count();
+        $tickets_assigned = $tickets_assigned_raw->paginate(3,['*'],'page_l');
 
-        $tickets_reported = $this->ticketRepository->where('reporter_id','=', Auth::user()->id)->orderBy("updated_at", 'desc');
-        $counter_reported = $tickets_reported->count();
-        $tickets_reported = $tickets_reported->paginate(2,['*'],'page');
+        $tickets_reported_raw = Ticket::where('reporter_id','=', Auth::user()->id)->orderBy("updated_at", 'desc');
+        $counter_reported = $tickets_reported_raw->get()->count();
+        $tickets_reported = $tickets_reported_raw->paginate(3,['*'],'page_r');
 
         return view('home',compact('tickets_assigned', 'tickets_reported','counter_assigned','counter_reported','users'));
     }
