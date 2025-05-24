@@ -7,6 +7,7 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Repositories\Role\RoleRepository;
 use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -62,6 +63,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     { 
+        $request['password'] = Hash::make($request['password']);
         $this->userRepository->create($request->all());
         toast('User berhasil dibuat!','success');
         return redirect('/user');
