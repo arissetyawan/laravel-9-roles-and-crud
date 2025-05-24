@@ -15,4 +15,18 @@ class Document extends Model
      * @var array
      */
     protected $fillable = ['ticket_id','user_id', 'name', 'type', 'size'];
+
+    public function get_url($host)
+    {
+        $path = '/document/'.$this->name;
+        if($host!=null){
+            return 'http://'.$host.$path;
+        }
+        return $path;
+    }
+    public function thumbnail()
+    {
+        return "height: 40x; width: 40px";
+    }
+
 }

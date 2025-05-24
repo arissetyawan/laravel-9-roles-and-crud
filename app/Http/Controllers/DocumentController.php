@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedDocument;
 use App\Http\Requests\StoreDocumentRequest;
@@ -63,7 +63,13 @@ class DocumentController extends Controller
         ]);
 
         toast('Dokumen berhasil disimpan!','success');
-        return redirect()->route('ticket/edit', ['id'=> $request['ticket_id']]);
+        return redirect()->route('ticket/edit', ['id'=> $request['ticket_id'].'#document']);
     }
 
+    public function destroy($id, Request $request)
+    {
+        Document::find($id)->delete();
+        toast('Dokumen berhasil dihapus!','success');
+        return redirect()->route('ticket/edit', ['id'=> $request['ticket_id'].'#document']);
+    }
 }

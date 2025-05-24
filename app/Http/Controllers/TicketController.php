@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Repositories\Ticket\TicketRepository;
@@ -67,7 +67,6 @@ class TicketController extends Controller
      */
     public function store(StoreticketRequest $request)
     {
-        dd($request);
         $request['reported_at'] = Carbon::now();
         $request['last_status_at'] = Carbon::now();
         $ticket = $this->ticketRepository->create($request->all());
@@ -81,16 +80,16 @@ class TicketController extends Controller
      * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $categories = $this->categoryRepository->all();
         $prioritas = $this->priorityRepository->all();
         $ticket = $this->ticketRepository->getById($id);
         $assigneds = $this->roleRepository->getById(Role::id_perangkat())->users()->get();
-        $documents = Document::all();
-
+        $documents = Document::where('ticket_id', '=', $id)->get();
+        $host = $request->getHttpHost();
         // dd($documents);
-        return view('dashboard.ticket.edit',compact('ticket','categories','prioritas','assigneds', 'documents'));
+        return view('dashboard.ticket.edit',compact('ticket','categories','prioritas','assigneds', 'documents', 'host'));
     }
 
     /**

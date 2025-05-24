@@ -151,7 +151,6 @@
      <div class="form-group">
       <div class="bg-light p-5 rounded">
         <b>Sertakan Berkas Dokumen (Jika Perlu)</b>
-
        <table class="table table-striped">
           <thead>
             <tr>
@@ -165,11 +164,15 @@
           <tbody>
             @foreach($documents as $file)
               <tr>
-                <td width="3%">{{ $file->id }}</td>
-                <td>{{ $file->name }}</td>
+                <td width="3%">{{ $loop->index+1 }}</td>
+                <td><a target="_NEW" href='{{$file->get_url($host)}}'><img src="{{$file->get_url(null)}}" style="{{ $file->thumbnail()}}" >{{ $file->name }}</a></td>
                 <td width="10%">{{ $file->size }}</td>
                 <td width="10%">{{ $file->type }}</td>
-                <td width="5%"><a href="{{ $file->type }}" class="btn btn-danger btn-sm">X</a></td>
+                <td width="5%">
+                    @if((Auth::user()->role->name=='admin' || ($file->user_id==Auth::user()->id)) && !$ticket->is_selesai())
+                    <a href="{{ Route('document/destroy',['id'=> $file->id, 'ticket_id'=>$ticket->id]) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    @endif
+                    </td></td>
               </tr>
             @endforeach
           </tbody>
@@ -177,12 +180,13 @@
 
         <form method="POST" action="{{ Route('document/store') }}" enctype="multipart/form-data">
             @csrf
+           <a name='document'></a>
            <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
            <div class="form-group mt-4">
-              <input type="file" name="document" multiple="false" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+              <input type="file" name="document" multiple="false" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip" required="true">
             </div>
-            <input type="submit" name="attach" class="w-100 btn btn-lg btn-primary mt-4" value="Kirim" />
+            <input type="submit" name="attach" class="w-100 btn btn-lg btn-primary mt-4" value="Upload" />
         </form>
       </div>
      </div>
