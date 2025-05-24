@@ -23,13 +23,13 @@
                     @foreach($tickets as $ticket)
                      <tr class="{{$ticket->get_class()}}" title="{{$ticket->priority->name}}" >
                         <td>{{ $loop->index+1 }}</td>
-                        <td><b>{{ $ticket->category->name }}:</b> {!! Str::limit($ticket->description, 15, ' ...') !!}&nbsp;<b><sup>{{ $ticket->get_status_name() }}</b></sup></b></td>
+                        <td><b>{{ $ticket->category->name }}:</b> {!! Str::limit($ticket->description, 15, ' ...') !!}&nbsp;<b><sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></td>
                         <td>{{ $ticket->get_assigned_name() }}</td>
                         <td>
                         <a href="{{ Route('ticket/edit',$ticket->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         </td>
                         <td>
-                        @if(Auth::user()->role->name=='admin')
+                        @if(Auth::user()->role->name=='admin' && $ticket->is_ditolak())
                         <a href="{{ Route('ticket/destroy',$ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         @endif
                         </td>

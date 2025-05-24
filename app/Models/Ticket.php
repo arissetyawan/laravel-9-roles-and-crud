@@ -14,7 +14,7 @@ class Ticket extends Model
      *
      * @var array
      */
-    protected $fillable = ['status_id','description','category_id','reporter_id', 'assigned_id', 'priority_id','rating', 'rating_comment'];
+    protected $fillable = ['status_id','description','category_id','reporter_id', 'assigned_id', 'priority_id','rating', 'rating_comment','assigned_at', 'last_status_at','circle_counter'];
 
     /**
      * Get the user.
@@ -51,6 +51,26 @@ class Ticket extends Model
     {
         $user = User::find($this->reporter_id);
         return ($user==null ? '?' : $user->name);
+    }
+
+    public function is_new(){
+        $id_status = Status::whereName('baru')->first()->id;
+        return ($this->status_id == $id_status);
+    }
+
+    public function is_sedang_dikerjakan(){
+        $id_status = Status::whereName('sedang dikerjakan')->first()->id;
+        return ($this->status_id == $id_status);
+    }
+
+    public function is_selesai(){
+        $id_status = Status::whereName('selesai')->first()->id;
+        return ($this->status_id == $id_status);
+    }
+
+    public function is_ditolak(){
+        $id_status = Status::whereName('ditolak')->first()->id;
+        return ($this->status_id == $id_status);
     }
 
     public function get_class()

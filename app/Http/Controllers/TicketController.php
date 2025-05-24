@@ -9,7 +9,9 @@ use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Priority\PriorityRepository;
 use App\Repositories\User\UserRepository;
 use App\Models\Ticket;
+use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class TicketController extends Controller
 {
@@ -36,7 +38,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = $this->ticketRepository->paginate(5,['*'],'page');
+        $tickets = $this->ticketRepository->orderBy("status_id")->paginate(5,['*'],'page');
 
         return view('dashboard.ticket.index',compact('tickets'));
     }
@@ -61,6 +63,7 @@ class TicketController extends Controller
      */
     public function store(StoreticketRequest $request)
     {
+        $request['reported_at'] = Carbon::now();
         $ticket = $this->ticketRepository->create($request->all());
         toast('Tiket berhasil dibuat!','success');
         return redirect()->route('ticket/edit', ['id'=> $ticket->id]);
@@ -91,15 +94,33 @@ class TicketController extends Controller
      */
     public function update(UpdateticketRequest $request)
     {
-        $ticket = Ticket::find($request['id']);
-        if($request['assigned_id']!=null && $ticket->status_id==1){
-            $request['status_id'] = 2; //sedang dikerjakan
+        $ticket = Ticket::find($request->id);
+        $message = 'Tiket berhasil diperbarui!';
+        if($request['assigned_id']!=null && ($ticket->is_new() || $ticket->is_ditolak())){
+            $request['status_id'] = Status::id_sedang_dikerjakan();
+            $request['rating'] = 0;
+            $request['assigned_at'] = Carbon::now();
+            $request['last_status_at']= Carbon::now();
+            $message = 'Tiket sedang dikerjakan!';
         }
-        if($request['assigned_id']!=null && $ticket->status_id==2 && $request['btn']=='Tiket Selesai Dikerjakan'){
-            $request['status_id'] = 4; //selesai
+        elseif($ticket->is_sedang_dikerjakan() && $request['btn']=='Tiket Selesai Dikerjakan'){
+            $request['status_id'] = Status::id_selesai();
+            $request['last_status_at']= Carbon::now();
+            $request['rating'] = 0;
+            $message = 'Tiket selesai dikerjakan!';
         }
+        elseif($request['btn']=='Tolak'){
+            $request['last_status_at']= Carbon::now();
+            $request['rating'] = 0;
+            $message = 'Tiket ditolak untuk dikerjakan!';
+            $request['status_id'] = Status::id_ditolak();
+        }
+        elseif($request['btn']=='Terima kasih!'){
+            $message = 'Terima kasih ! Umpan balik anda berhasil dikirimkan!';
+        }
+        $request['circle_counter'] = $ticket->circle_counter+1;
         $this->ticketRepository->updateById($request->id,$request->except('id'));
-        toast('Tiket berhasil diperbarui!','success');
+        toast($message,'success');
         return redirect('/ticket');
     }
 

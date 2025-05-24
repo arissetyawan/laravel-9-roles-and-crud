@@ -16,4 +16,20 @@ class Status extends Model
      */
     protected $fillable = ['name'];
 
+    public static function id_new(){
+        return Status::whereName('baru')->id;
+    }
+
+    public static function id_sedang_dikerjakan(){
+        return Status::whereName('sedang dikerjakan')->first()->id;
+    }
+
+    public static function id_selesai(){
+        return Status::whereName('selesai')->first()->id;
+    }
+
+    public static function id_ditolak(){
+        return Status::whereName('ditolak')->first()->id;
+    }
+
 }

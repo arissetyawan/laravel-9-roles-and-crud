@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-    <div class="card-header" ><b>Formulir {{ __('Tiket') }}</b>&nbsp;<sup style="color:red">{{ $ticket->get_status_name() }}</sup></div>
+    <div class="card-header" ><b>Formulir {{ __('Tiket') }}</b>&nbsp;;<b><sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></div>
     <div class="card-body">
 
     @if ($errors->any()) 
@@ -21,14 +21,14 @@
         <input type="hidden" name="id" value="{{ $ticket->id }}">
         <div class="form-group">
           <label for="name">Deskripsi</label>
-          <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="3">{{ $ticket->description }}</textarea>
+          <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" maxlength="255" rows="3">{{ $ticket->description }}</textarea>
           @error('description')
           <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
           @enderror
         </div>
         <br />
         <div class="form-group">
-          <label for="description">Kategori</label>
+          <label for="category_id">Kategori</label>
           <select name="category_id"  id="category_id" required="true" class="form-control @error('category') is-invalid @enderror">
               <option value="">-- Pilih Kategori --</option>
               @foreach($categories as $category)
@@ -43,13 +43,13 @@
         </div>
         <br />
         <div class="form-group">
-          <label for="description">Pelapor</label>
-          <input type="text" class="form-control" disabled='true' name="reporter_name" id="reporter_name" value="{{ $ticket->reporter_name() }}" placeholder="Role name">
+          <label for="reporter_name">Pelapor</label>
+          <input type="text" class="form-control" disabled='true' name="reporter_name" id="reporter_name" value="{{ $ticket->reporter_name() }}" placeholder="Reporter name">
         </div>
         <br />
         <div class="form-group">
           <label for="description">Petugas</label>
-          <select name="assigned_id"  id="assigned_id" class="form-control @error('assigned') is-invalid @enderror" required="true">
+          <select name="assigned_id" {{($ticket->is_new() || $ticket->is_ditolak()) ? '': 'disabled'}} id="assigned_id" class="form-control @error('assigned') is-invalid @enderror" required="true">
               <option value="">-- Pilih Petugas --</option>
               @foreach($assigneds as $assigned)
                 <option @if($assigned->id == $ticket->assigned_id) selected @endif value="{{ $assigned->id }}">{{ $assigned->name }} </option>
@@ -77,11 +77,21 @@
         </div>
         <br />
         <a class="btn btn-success" onclick="window.history.back();"><i class="fa fa-chevron-left"></i>&nbsp;Kembali</a>
-         @if((Auth::user()->role->name=='rt' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
-        <input name='btn' type="submit" class="btn btn-primary" value="Simpan">
-        <input name='btn' type="submit" class="btn btn-warning" value="Tiket Selesai Dikerjakan">
+         @if(Auth::user()->role->name=='rt' && $ticket->reporter_id==Auth::user()->id && $ticket->is_new())
+           <input name='btn' type="submit" class="btn btn-primary" value="Simpan">
+         @endif
+
+         @if(Auth::user()->role->name=='admin' && ($ticket->is_ditolak() || $ticket->is_new()))
+            <input name='btn' type="submit" class="btn btn-primary" value="Tugaskan">
+         @endif
+         @if((Auth::user()->role->name=='admin' || Auth::user()->role->name=='perangkat') && $ticket->is_sedang_dikerjakan())
+            <input name='btn' type="submit" class="btn btn-warning" value="Tiket Selesai Dikerjakan">
+            <a href='javascript:void(0)' name='btn' class="btn btn-danger" onclick="document.getElementById('btn-tolak').click();">Tolak</a>
+         @endif
+
+
         <hr />
-        <div class="form-group">
+        <div class="form-group" disabled='true'>
             <table class="table table-hover">
                 <thead>
                 <tr class="{{$ticket->get_class()}}">
@@ -115,11 +125,20 @@
                     </tr>
                 </tfooter>
               </table>
-          <button type="submit" class="btn btn-success">Terima kasih!</button>
+
+          <input name='btn' type="submit" class="btn btn-primary" value="Terima kasih!">
         </div>
-        @endif
 
      </form>
+
+
+    <form method="POST" action="{{ Route('ticket/update') }}" style="display: none">
+        @csrf
+        <input type="hidden" name="id" value="{{ $ticket->id }}">
+        <input type="hidden" name="description" value="{{ $ticket->description }}">
+        <input type="hidden" name="category_id" value="{{ $ticket->category_id }}">
+        <input name='btn' type="submit" class="btn btn-danger" value="Tolak" id='btn-tolak'>
+    </form>
 
      @if((Auth::user()->role->name=='rt' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
      <div class="form-group">
@@ -138,7 +157,7 @@
     @endif
 
      <div class="form-group"><br />
-        <b>Riwayat</b>
+        <b>Riwayat</b>&nbsp; (<small>counter flow: {{$ticket->circle_counter}}</small>)
         <ul>
           <li>
             Dibuat: {{ $ticket->reported_at }}
