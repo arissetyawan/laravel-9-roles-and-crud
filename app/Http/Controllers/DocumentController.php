@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedDocument;
 use App\Http\Requests\StoreDocumentRequest;
+use App\Models\Document;
 
 class DocumentController extends Controller
 {
@@ -45,7 +46,7 @@ class DocumentController extends Controller
      */
     public function store(StoreDocumentRequest $request)
     {
-        dd($request->document);
+        // dd($request->document);
         $documentName = Auth::user()->id . '_' . time() . '.'. $request['document']->extension();
 
         $type = $request->document->getClientMimeType();
@@ -62,7 +63,7 @@ class DocumentController extends Controller
         ]);
 
         toast('Dokumen berhasil disimpan!','success');
-        return redirect('priority');
+        return redirect()->route('ticket/edit', ['id'=> $request['ticket_id']]);
     }
 
 }

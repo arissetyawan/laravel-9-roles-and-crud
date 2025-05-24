@@ -151,16 +151,6 @@
      <div class="form-group">
       <div class="bg-light p-5 rounded">
         <b>Sertakan Berkas Dokumen (Jika Perlu)</b>
-        <form method="POST" action="{{ Route('document/store') }}" enctype="multipart/form-data">
-            @csrf
-           <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-           <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-           <div class="form-group mt-4">
-              <input type="file" name="document" multiple="false" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
-            </div>
-            <input type="submit" name="attach" class="w-100 btn btn-lg btn-primary mt-4" value="Kirim" />
-        </form>
-      </div>
 
        <table class="table table-striped">
           <thead>
@@ -179,12 +169,22 @@
                 <td>{{ $file->name }}</td>
                 <td width="10%">{{ $file->size }}</td>
                 <td width="10%">{{ $file->type }}</td>
-                <td width="5%"><a href="{{ $file->type }}" class="btn btn-danger btn-sm">Delete</a></td>
+                <td width="5%"><a href="{{ $file->type }}" class="btn btn-danger btn-sm">X</a></td>
               </tr>
             @endforeach
           </tbody>
         </table>
 
+        <form method="POST" action="{{ Route('document/store') }}" enctype="multipart/form-data">
+            @csrf
+           <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+           <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+           <div class="form-group mt-4">
+              <input type="file" name="document" multiple="false" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+            </div>
+            <input type="submit" name="attach" class="w-100 btn btn-lg btn-primary mt-4" value="Kirim" />
+        </form>
+      </div>
      </div>
     <br />
     @endif
