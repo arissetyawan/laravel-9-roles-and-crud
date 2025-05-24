@@ -75,7 +75,9 @@
               </span>
           @enderror
         </div>
+
         <br />
+
         <a class="btn btn-success" onclick="window.history.back();"><i class="fa fa-chevron-left"></i>&nbsp;Kembali</a>
          @if(Auth::user()->role->name=='rt' && $ticket->reporter_id==Auth::user()->id && $ticket->is_new())
            <input name='btn' type="submit" class="btn btn-primary" value="Simpan">
@@ -88,10 +90,12 @@
            @if($ticket->is_sedang_dikerjakan())
             <input name='btn' type="submit" class="btn btn-warning" value="Tiket Selesai Dikerjakan">
            @endif
-            <a href='javascript:void(0)' name='btn' class="btn btn-danger" onclick="document.getElementById('btn-tolak').click();">Tolak</a>
+           @if($ticket->is_new() || $ticket->is_sedang_dikerjakan())
+              <a href='javascript:void(0)' name='btn' class="btn btn-danger" onclick="document.getElementById('btn-tolak').click();">Tolak</a>
+           @endif
          @endif
 
-
+         @if($ticket->is_selesai())
         <hr />
         <div class="form-group" disabled='true'>
             <table class="table table-hover">
@@ -130,6 +134,7 @@
 
           <input name='btn' type="submit" class="btn btn-primary" value="Terima kasih!">
         </div>
+        @endif
 
      </form>
 
