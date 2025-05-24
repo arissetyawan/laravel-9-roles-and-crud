@@ -15,9 +15,9 @@
                         <th scope="col" class="col-1">#</th>
                         <th scope="col" class="col">Petugas</th>
                         <th scope="col" class="col">Tiket</th>
-                        <th scope="col" class="col">Min Rating</th>
-                        <th scope="col" class="col">Max Rating</th>
-                        <th scope="col" class="col">Total Rating</th>
+                        <th scope="col" class="text-center col">Min Rating</th>
+                        <th scope="col" class="text-center col">Max Rating</th>
+                        <th scope="col" class="col-3">Total Rating</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,8 +26,8 @@
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $user['name'] }}</td>
                             <td>{{ $user['ticket'] }}</td>
-                            <td>{{ $user['min_rating'] }}</td>
-                            <td>{{ $user['max_rating'] }}</td>
+                            <td class="text-center">{{ $user['min_rating'] }}</td>
+                            <td class="text-center">{{ $user['max_rating'] }}</td>
                             <td>{{ $user['rating'] }}  ({{ $user['rating_percentage'] }}%)</td>
                         </tr>
                         @endforeach

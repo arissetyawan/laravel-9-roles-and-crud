@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function get_rating()
     {
-       return Ticket::where('assigned_id','=', $this->id)->sum('rating');
+       return Ticket::where('assigned_id','=', $this->id)->where('status_id', '=', Status::id_selesai())->sum('rating');
     }
     public function get_ticket()
     {
