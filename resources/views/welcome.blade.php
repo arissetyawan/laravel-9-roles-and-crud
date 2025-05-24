@@ -22,7 +22,10 @@
                     @foreach($tickets as $ticket)
                      <tr class="{{$ticket->get_class()}}" title="{{$ticket->priority->name}}" >
                         <td>{{ $loop->index+1 }}</td>
-                        <td><b>{{ $ticket->category->name }}:</b> {!! $ticket->description !!}&nbsp;<b><sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}<small>({{ $ticket->last_status_at}} )</small></sup></b></td>
+                        <td><b>{{ $ticket->category->name }}:</b> {!! $ticket->description !!}&nbsp;<b><sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}
+                            @if(!$ticket->is_new())
+                            <small>({{ $ticket->last_status_at}} )</small>
+                            @endif</sup></b></td>
                         <td>{{ $ticket->get_assigned_name() }}</td>
                         <td>
                     </tr>
