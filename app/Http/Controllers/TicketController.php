@@ -7,9 +7,11 @@ use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Repositories\Ticket\TicketRepository;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Priority\PriorityRepository;
+use App\Repositories\Role\RoleRepository;
 use App\Repositories\User\UserRepository;
 use App\Models\Ticket;
 use App\Models\Status;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -18,12 +20,13 @@ class TicketController extends Controller
 
     public $ticketRepository;
 
-    public function __construct(TicketRepository $ticketRepository, CategoryRepository $categoryRepository, PriorityRepository $priorityRepository, UserRepository $userRepository)
+    public function __construct(TicketRepository $ticketRepository, CategoryRepository $categoryRepository, PriorityRepository $priorityRepository, UserRepository $userRepository, RoleRepository $roleRepository)
     {
         $this->ticketRepository =  $ticketRepository;
         $this->categoryRepository = $categoryRepository;
         $this->priorityRepository = $priorityRepository;
         $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
         $this->middleware(function ($request, $next) {
 
             $this->user = Auth::user();
@@ -81,8 +84,7 @@ class TicketController extends Controller
         $categories = $this->categoryRepository->all();
         $prioritas = $this->priorityRepository->all();
         $ticket = $this->ticketRepository->getById($id);
-        $role_rt = 3;
-        $assigneds = $this->userRepository->byRole($role_rt);
+        $assigneds = $this->roleRepository->getById(Role::id_perangkat())->users()->get();
         return view('dashboard.ticket.edit',compact('ticket','categories','prioritas','assigneds'));
     }
 

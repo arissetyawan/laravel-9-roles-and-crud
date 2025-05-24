@@ -5,6 +5,42 @@
 <div class="container">
 
     <div class="row justify-content-center">
+        <div class="col">
+            <div class="card">
+            <div class="card-header fw-bold">{{ __('Statistik Kinerja Petugas') }}</div>
+            <div class="card-body">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col-1">#</th>
+                        <th scope="col" class="col">Petugas</th>
+                        <th scope="col" class="col">Tiket</th>
+                        <th scope="col" class="col">Min Rating</th>
+                        <th scope="col" class="col">Max Rating</th>
+                        <th scope="col" class="col">Total Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr>
+                            <td>{{ $loop->index+1 }}</td>
+                            <td>{{ $user['name'] }}</td>
+                            <td>{{ $user['ticket'] }}</td>
+                            <td>{{ $user['min_rating'] }}</td>
+                            <td>{{ $user['max_rating'] }}</td>
+                            <td>{{ $user['rating'] }}  ({{ $user['rating_percentage'] }})</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center"><br /></div>
+
+    <div class="row justify-content-center">
 
         <div class="col-md-6">
             <div class="card">

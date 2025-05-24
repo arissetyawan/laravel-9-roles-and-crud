@@ -51,4 +51,30 @@ class User extends Authenticatable
     {
        return $this->belongsTo(Role::class);
     }
+
+    public function get_rating()
+    {
+       return Ticket::where('assigned_id','=', $this->id)->sum('rating');
+    }
+    public function get_ticket()
+    {
+        return Ticket::where('assigned_id', '=', $this->id)->count();
+    }
+    public function get_min_rating()
+    {
+        $tickets= Ticket::where('assigned_id', '=', $this->id)->where('status_id', '=', Status::id_selesai())->orderBy('rating')->first();
+        if($tickets){
+            return $tickets->rating;
+        }
+        return 0;
+    }
+    public function get_max_rating()
+    {
+        $tickets = Ticket::where('assigned_id', '=', $this->id)->where('status_id', '=', Status::id_selesai())->orderByDesc('rating')->first();
+        if($tickets){
+            return $tickets->rating;
+        }
+        return 0;
+    }
+
 }
