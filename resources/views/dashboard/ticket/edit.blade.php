@@ -84,8 +84,10 @@
          @if(Auth::user()->role->name=='admin' && ($ticket->is_ditolak() || $ticket->is_new()))
             <input name='btn' type="submit" class="btn btn-primary" value="Tugaskan">
          @endif
-         @if((Auth::user()->role->name=='admin' || Auth::user()->role->name=='perangkat') && $ticket->is_sedang_dikerjakan())
+         @if(Auth::user()->role->name=='admin' || Auth::user()->role->name=='perangkat')
+           @if($ticket->is_sedang_dikerjakan())
             <input name='btn' type="submit" class="btn btn-warning" value="Tiket Selesai Dikerjakan">
+           @endif
             <a href='javascript:void(0)' name='btn' class="btn btn-danger" onclick="document.getElementById('btn-tolak').click();">Tolak</a>
          @endif
 
