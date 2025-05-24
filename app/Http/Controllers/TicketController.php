@@ -29,7 +29,6 @@ class TicketController extends Controller
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
         $this->middleware(function ($request, $next) {
-
             $this->user = Auth::user();
             return $next($request);
         });

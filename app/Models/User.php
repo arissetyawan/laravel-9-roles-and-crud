@@ -52,6 +52,10 @@ class User extends Authenticatable
        return $this->belongsTo(Role::class);
     }
 
+    public function get_role_name()
+    {
+       return Role::find($this->role_id)->name;
+    }
     public function get_rating()
     {
        return Ticket::where('assigned_id','=', $this->id)->where('status_id', '=', Status::id_selesai())->sum('rating');

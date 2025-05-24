@@ -61,27 +61,17 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} ({{Auth::user()->role->name}})
+                                    {{ Auth::user()->name }} ({{Auth::user()->get_role_name()}})
                                 </a>
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                @can('is_user')
+                                @if(Auth::user()->get_role_name()=='rt' || Auth::user()->get_role_name()=='perangkat')
                                   <a class="dropdown-item" href="{{ route('ticket') }}">
                                         {{ __('Tiket') }}
                                   </a>
                                 @endif
-                                @can('is_rt')
-                                  <a class="dropdown-item" href="{{ route('ticket') }}">
-                                        {{ __('Tiket') }}
-                                  </a>
-                                @endif
-                                @can('is_perangkat')
-                                  <a class="dropdown-item" href="{{ route('ticket') }}">
-                                        {{ __('Tiket') }}
-                                  </a>
-                                @endif
-                                @can('is_admin')
+                                @if(Auth::user()->get_role_name()=='admin')
                                   <a class="dropdown-item" href="{{ route('ticket') }}">
                                         {{ __('Tiket') }}
                                   </a>

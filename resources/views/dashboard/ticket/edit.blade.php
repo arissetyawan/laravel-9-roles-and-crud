@@ -95,7 +95,7 @@
            @endif
          @endif
 
-         @if($ticket->is_selesai())
+         @if($ticket->is_selesai() && ($ticket->reporter_id==Auth::user()->id || Auth::user()->role->name='admin'))
         <hr />
         <div class="form-group" disabled='true'>
             <table class="table table-hover">
