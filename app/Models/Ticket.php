@@ -90,4 +90,10 @@ class Ticket extends Model
     {
        return ($this->status==null? 'Baru' : $this->status->name);
     }
+
+    public function get_code(){
+       $time = strtotime($this->created_at);
+       $split = str_split($time, 5);
+       return $split[0].'-'.$split[1];
+    }
 }

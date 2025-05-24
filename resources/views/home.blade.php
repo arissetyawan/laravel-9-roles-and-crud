@@ -73,7 +73,7 @@
                             <tr title="{{$ticket->priority->name}}" >
                                 <td></td>
                                 <td colspan="2">
-                                <small><i class="fa fa-calendar"></i> {{ $ticket->created_at->toDateTimeString() }}</small> oleh {{$ticket->get_reporter_name()}}.
+                                <small><b>#{{$ticket->get_code()}}</b>&nbsp;<i class="fa fa-calendar"></i> {{ $ticket->created_at->toDateTimeString() }}</small> oleh {{$ticket->get_reporter_name()}}.
                                 @if($ticket->is_selesai())
                                     <br />Rating
                                     @for ($i = 1; $i < 6; $i++)
@@ -133,7 +133,7 @@
                             <tr title="{{$ticket->priority->name}}" >
                                 <td></td>
                                 <td colspan="3">
-                                <small><i class="fa fa-calendar"></i> {{ $ticket->created_at->toDateTimeString() }}</small> oleh {{$ticket->get_reporter_name()}}.
+                                <small><b>#{{$ticket->get_code()}}</b>&nbsp;<i class="fa fa-calendar"></i> {{ $ticket->created_at->toDateTimeString() }}</small> oleh {{$ticket->get_reporter_name()}}.
                                 @if($ticket->is_selesai())
                                     <br />Rating
                                     @for ($i = 1; $i < 6; $i++)

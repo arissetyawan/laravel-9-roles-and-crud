@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-    <div class="card-header" ><b>Formulir {{ __('Tiket') }}&nbsp;<sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></div>
+    <div class="card-header" ><b>Formulir {{ __('Tiket') }}: {{$ticket->get_code()}}&nbsp;<sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></div>
     <div class="card-body">
 
     @if ($errors->any()) 
@@ -158,6 +158,7 @@
               <th scope="col">Name</th>
               <th scope="col">Size</th>
               <th scope="col">Type</th>
+              <th scope="col">Waktu</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -168,11 +169,12 @@
                 <td><a target="_NEW" href='{{$file->get_url($host)}}'><img src="{{$file->get_url(null)}}" style="{{ $file->thumbnail()}}" >{{ $file->name }}</a></td>
                 <td width="10%">{{ $file->size }}</td>
                 <td width="10%">{{ $file->type }}</td>
+                <td>{{ $file->created_at }}</td>
                 <td width="5%">
                     @if((Auth::user()->role->name=='admin' || ($file->user_id==Auth::user()->id)) && !$ticket->is_selesai())
                     <a href="{{ Route('document/destroy',['id'=> $file->id, 'ticket_id'=>$ticket->id]) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     @endif
-                    </td></td>
+                </td>
               </tr>
             @endforeach
           </tbody>
