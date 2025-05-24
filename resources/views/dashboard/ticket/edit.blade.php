@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-    <div class="card-header" ><b>Formulir {{ __('Tiket') }}</b>&nbsp;;<b><sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></div>
+    <div class="card-header" ><b>Formulir {{ __('Tiket') }}&nbsp;<sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></div>
     <div class="card-body">
 
     @if ($errors->any()) 
@@ -14,7 +14,7 @@
         @endforeach
     @endif
 
-    <form method="POST" action="{{ Route('ticket/update') }}">
+    <form method="POST" action="{{ Route('ticket/update') }}" enctype="multipart/form-data">
         @csrf
 
         <input type="hidden" name='rating' id='rating' value="{{ $ticket->rating }}">
@@ -150,16 +150,42 @@
      @if((Auth::user()->role->name=='rt' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
      <div class="form-group">
       <div class="bg-light p-5 rounded">
-        <b>Sertakan Berkas Gambar (Jika Perlu)</b>
-        <form action="{{ '/' }}" method="post" enctype="multipart/form-data">
+        <b>Sertakan Berkas Dokumen (Jika Perlu)</b>
+        <form method="POST" action="{{ Route('document/store') }}" enctype="multipart/form-data">
             @csrf
-            <div class="form-group mt-4">
-              <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
+           <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+           <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+           <div class="form-group mt-4">
+              <input type="file" name="document" multiple="false" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
             </div>
-            <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Kirim</button>
+            <input type="submit" name="attach" class="w-100 btn btn-lg btn-primary mt-4" value="Kirim" />
         </form>
       </div>
-    </div>
+
+       <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Size</th>
+              <th scope="col">Type</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($documents as $file)
+              <tr>
+                <td width="3%">{{ $file->id }}</td>
+                <td>{{ $file->name }}</td>
+                <td width="10%">{{ $file->size }}</td>
+                <td width="10%">{{ $file->type }}</td>
+                <td width="5%"><a href="{{ $file->type }}" class="btn btn-danger btn-sm">Delete</a></td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+     </div>
     <br />
     @endif
 

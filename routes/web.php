@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\DocumentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -132,7 +133,23 @@ Route::middleware('auth')->controller(TicketController::class)->prefix("ticket")
 
 });
 
+
+Route::middleware('auth')->controller(DocumentController::class)->prefix("document")->group(function (){
+    Route::get('/', 'index')->name('document');
+    Route::get('/create', 'create')->name('document/create');
+    Route::post('/store', 'store')->name('document/store');
+    Route::get('/edit/{id}', 'edit')->name('document/edit')->where('id','[0-9]+');
+    Route::post('/update', 'update')->name('document/update')->where('id','[0-9]+');
+    Route::get('/destroy/{id}', 'destroy')->name('document/destroy')->where('id','[0-9]+');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
+/**
+* Document Upload Routes
+// */
+// Route::get('/documents', 'DocumentsController@index')->name('documents.index');
+// Route::get('/documents/add', 'DocumentsController@create')->name('documents.create');
+// Route::post('/documents/add', 'DocumentsController@store')->name('documents.store');

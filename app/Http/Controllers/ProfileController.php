@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth; 
 use App\Repositories\User\UserRepository;
-use App\Http\Requests\profile\PasswordProfileRequest;
-use App\Http\Requests\profile\ProfileRequest;
+use App\Http\Requests\Profile\PasswordProfileRequest;
+use App\Http\Requests\Profile\ProfileRequest;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller

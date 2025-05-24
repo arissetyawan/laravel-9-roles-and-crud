@@ -12,6 +12,7 @@ use App\Repositories\User\UserRepository;
 use App\Models\Ticket;
 use App\Models\Status;
 use App\Models\Role;
+use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -66,6 +67,7 @@ class TicketController extends Controller
      */
     public function store(StoreticketRequest $request)
     {
+        dd($request);
         $request['reported_at'] = Carbon::now();
         $request['last_status_at'] = Carbon::now();
         $ticket = $this->ticketRepository->create($request->all());
@@ -85,7 +87,10 @@ class TicketController extends Controller
         $prioritas = $this->priorityRepository->all();
         $ticket = $this->ticketRepository->getById($id);
         $assigneds = $this->roleRepository->getById(Role::id_perangkat())->users()->get();
-        return view('dashboard.ticket.edit',compact('ticket','categories','prioritas','assigneds'));
+        $documents = Document::all();
+
+        // dd($documents);
+        return view('dashboard.ticket.edit',compact('ticket','categories','prioritas','assigneds', 'documents'));
     }
 
     /**
@@ -140,4 +145,5 @@ class TicketController extends Controller
         toast('Ticket berhasil dihapus!','success');
         return redirect()->back();
     }
+
 }
