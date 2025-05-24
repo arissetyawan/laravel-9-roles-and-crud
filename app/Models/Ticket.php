@@ -45,7 +45,7 @@ class Ticket extends Model
     public function get_assigned_name()
     {
         $user = User::find($this->assigned_id);
-        return ($user==null ? '?' : $user->name);
+        return ($user==null ? 'Menunggu..' : $user->name);
     }
     public function get_reporter_name()
     {

@@ -19,9 +19,9 @@ use App\Http\Controllers\StatusController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+// Route::get('/', function () {
+//     return redirect('/home');
+// });
 
 Route::middleware('auth')->controller(UserController::class)->prefix('user')->group(function ()
 {
@@ -135,3 +135,4 @@ Route::middleware('auth')->controller(TicketController::class)->prefix("ticket")
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
