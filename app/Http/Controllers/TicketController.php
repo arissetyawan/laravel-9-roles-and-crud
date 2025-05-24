@@ -64,6 +64,7 @@ class TicketController extends Controller
     public function store(StoreticketRequest $request)
     {
         $request['reported_at'] = Carbon::now();
+        $request['last_status_at'] = Carbon::now();
         $ticket = $this->ticketRepository->create($request->all());
         toast('Tiket berhasil dibuat!','success');
         return redirect()->route('ticket/edit', ['id'=> $ticket->id]);

@@ -22,13 +22,14 @@
                     @foreach($tickets as $ticket)
                      <tr class="{{$ticket->get_class()}}" title="{{$ticket->priority->name}}" >
                         <td>{{ $loop->index+1 }}</td>
-                        <td><b>{{ $ticket->category->name }}:</b> {!! $ticket->description !!}&nbsp;<b><sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></td>
+                        <td><b>{{ $ticket->category->name }}:</b> {!! $ticket->description !!}&nbsp;<b><sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}<small>({{ $ticket->last_status_at}} )</small></sup></b></td>
                         <td>{{ $ticket->get_assigned_name() }}</td>
                         <td>
                     </tr>
                     <tr title="{{$ticket->priority->name}}" >
                         <td></td>
-                        <td colspan="5"><small><i class="fa fa-calendar"></i> {{ $ticket->created_at->toDateTimeString() }}</small> oleh {{$ticket->get_reporter_name()}}. Status terakhir {{ $ticket->last_status_at}}
+                        <td colspan="3">
+                        <small><i class="fa fa-calendar"></i> {{ $ticket->created_at->toDateTimeString() }}</small> oleh {{$ticket->get_reporter_name()}}.
                         @if($ticket->is_selesai())
                             <br />Rating
                             @for ($i = 1; $i < 6; $i++)
@@ -39,7 +40,7 @@
                               @endif
                             @endfor
                             <br />
-                            Komentar Penyelesaian: {{ $ticket->rating_comment }}
+                            Umpan Balik: {{ $ticket->rating_comment }}
                          @endif
                         </td>
                     </tr>
