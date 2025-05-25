@@ -66,7 +66,7 @@
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                @if(Auth::user()->get_role_name()=='rt' || Auth::user()->get_role_name()=='perangkat')
+                                @if(Auth::user()->get_role_name()=='pelapor' || Auth::user()->get_role_name()=='petugas')
                                   <a class="dropdown-item" href="{{ route('ticket') }}">
                                         {{ __('Tiket') }}
                                   </a>

@@ -79,14 +79,14 @@
         <br />
 
         <a class="btn btn-success" onclick="window.history.back();"><i class="fa fa-chevron-left"></i>&nbsp;Kembali</a>
-         @if(Auth::user()->role->name=='rt' && $ticket->reporter_id==Auth::user()->id && $ticket->is_new())
+         @if(Auth::user()->role->name=='user' && $ticket->reporter_id==Auth::user()->id && $ticket->is_new())
            <input name='btn' type="submit" class="btn btn-primary" value="Simpan">
          @endif
 
          @if(Auth::user()->role->name=='admin' && ($ticket->is_ditolak() || $ticket->is_new()))
             <input name='btn' type="submit" class="btn btn-primary" value="Tugaskan">
          @endif
-         @if(Auth::user()->role->name=='admin' || Auth::user()->role->name=='perangkat')
+         @if(Auth::user()->role->name=='admin' || Auth::user()->role->name=='petugas')
            @if($ticket->is_sedang_dikerjakan())
             <input name='btn' type="submit" class="btn btn-warning" value="Tiket Selesai Dikerjakan">
            @endif
@@ -95,7 +95,7 @@
            @endif
          @endif
 
-         @if($ticket->is_selesai() && ($ticket->reporter_id==Auth::user()->id || Auth::user()->role->name='admin'))
+         @if($ticket->is_selesai() && ($ticket->reporter_id===Auth::user()->id || Auth::user()->role->name=='admin'))
         <hr />
         <div class="form-group" disabled='true'>
             <table class="table table-hover">
@@ -147,7 +147,7 @@
         <input name='btn' type="submit" class="btn btn-danger" value="Tolak" id='btn-tolak'>
     </form>
 
-     @if((Auth::user()->role->name=='rt' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
+     @if((Auth::user()->role->name=='pelapor' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
      <div class="form-group">
       <div class="bg-light p-5 rounded">
         <b>Sertakan Berkas Dokumen (Jika Perlu)</b>

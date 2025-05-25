@@ -36,12 +36,12 @@ class HomeController extends Controller
     public function index()
     {
 
-        $role = Role::whereName('perangkat')->first();
+        $role = Role::whereName('petugas')->first();
         $users_found = $role->users()->get();
         $users = collect();
         $total = Ticket::where('status_id', Status::id_selesai())->sum('rating');
         foreach ($users_found as $user) {
-            $users->push(['ticket' => $user->get_ticket(), 'rating' => $user->get_rating(), 'name' => $user->name, 'min_rating' => $user->get_min_rating(), 'max_rating'=>$user->get_max_rating(), 'rating_percentage' => round((($user->get_rating()/$total)*100), 2)]);
+            $users->push(['id'=>$user->id, 'bobot' => $user->get_total_weight(), 'ticket' => $user->get_ticket(), 'rating' => $user->get_rating(), 'name' => $user->name, 'min_rating' => $user->get_min_rating(), 'max_rating'=>$user->get_max_rating(), 'rating_percentage' => round((($user->get_rating()/$total)*100), 2)]);
         }
         $users = $users->sortByDesc('rating');
         $tickets_assigned_raw = Ticket::where('assigned_id','=', Auth::user()->id)->orderBy("updated_at", 'desc');
@@ -52,6 +52,10 @@ class HomeController extends Controller
         $counter_reported = $tickets_reported_raw->get()->count();
         $tickets_reported = $tickets_reported_raw->paginate(3,['*'],'page_r');
 
-        return view('home',compact('tickets_assigned', 'tickets_reported','counter_assigned','counter_reported','users'));
+        $ticket_tugas = Ticket::where('assigned_id', Auth::user()->id)->where('status_id', Status::id_sedang_dikerjakan())->count();
+        if($ticket_tugas>0){
+            toast('Terdapat '. $ticket_tugas .' tiket untuk dikerjakan. Mohon cek bagian tabel "Tiket Tugas". Klik selesai jika tiket telah dikerjakan untuk mendapatkan umpan balik dari pelapor !','success');
+        }
+        return view('home',compact('tickets_assigned', 'tickets_reported','counter_assigned','counter_reported','users','ticket_tugas'));
     }
 }

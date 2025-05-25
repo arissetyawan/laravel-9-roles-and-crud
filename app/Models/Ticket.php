@@ -86,6 +86,17 @@ class Ticket extends Model
         }
     }
 
+    public function get_weight_by_priority()
+    {
+        if ($this->priority->name=='segera'){
+            return 2;
+        }else if ($this->priority->name=='darurat'){
+            return 3;
+        }else{
+            return 1;
+        }
+    }
+
     public function get_status_name()
     {
        return ($this->status==null? 'Baru' : $this->status->name);

@@ -39,9 +39,13 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = $this->ticketRepository->orderBy("status_id")->paginate(5,['*'],'page');
+        if($request['assigned_id']!=null){
+            $tickets = $this->ticketRepository->where('assigned_id','=', $request['assigned_id'])->orderBy("status_id")->paginate(5,['*'],'page');
+        }else{
+            $tickets = $this->ticketRepository->orderBy("status_id")->paginate(5,['*'],'page');
+        }
 
         return view('dashboard.ticket.index',compact('tickets'));
     }
@@ -84,7 +88,7 @@ class TicketController extends Controller
         $categories = $this->categoryRepository->all();
         $prioritas = $this->priorityRepository->all();
         $ticket = $this->ticketRepository->getById($id);
-        $assigneds = $this->roleRepository->getById(Role::id_perangkat())->users()->get();
+        $assigneds = $this->roleRepository->getById(Role::id_petugas())->users()->get();
         $documents = Document::where('ticket_id', '=', $id)->get();
         $host = $request->getHttpHost();
         // dd($documents);

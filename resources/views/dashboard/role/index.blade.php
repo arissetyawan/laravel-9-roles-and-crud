@@ -31,7 +31,7 @@
                         @endif
                       </td>
                       <td>
-                        @if($role->users()->count()==0 && $role->name!='admin' && Auth::user()->role=='admin')
+                        @if($role->users()->count()==0 && $role->name!='admin' && Auth::user()->role->name=='admin')
                         <a href="{{ Route('role/destroy',$role->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         @endif
                       </td>

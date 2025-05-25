@@ -25,24 +25,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('is_adxmin',function ($user)
+        Gate::define('is_admin',function ($user)
         {
             return $user->role->name == 'admin';
         });
 
-        Gate::define('is_user',function ($user)
+        Gate::define('is_pelapor',function ($user)
         {
-            return $user->role->name == 'user';
+            return $user->role->name == 'pelapor';
         });
 
-        Gate::define('is_rt',function ($user)
+        Gate::define('is_petugas',function ($user)
         {
-            return $user->role->name == 'rt';
-        });
-
-        Gate::define('is_perangkat',function ($user)
-        {
-            return $user->role->name == 'perangkat';
+            return $user->role->name == 'petugas';
         });
     }
 }

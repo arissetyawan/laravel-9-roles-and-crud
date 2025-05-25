@@ -25,11 +25,11 @@ class Role extends Model
     {
         return $this->hasMany(User::class);
     }
-    public static function id_rt(){
-        return Role::whereName('rt')->first()->id;
+    public static function id_pelapor(){
+        return Role::whereName('pelapor')->first()->id;
     }
-    public static function id_perangkat(){
-        return Role::whereName('perangkat')->first()->id;
+    public static function id_petugas(){
+        return Role::whereName('petugas')->first()->id;
     }
 
 }

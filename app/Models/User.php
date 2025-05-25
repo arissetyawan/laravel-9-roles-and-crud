@@ -80,5 +80,14 @@ class User extends Authenticatable
         }
         return 0;
     }
+    public function get_total_weight()
+    {
+        $tickets = Ticket::where('assigned_id', '=', $this->id)->where('status_id', '=', Status::id_selesai())->get();
+        $get_weight_by_priority = 0;
+        foreach($tickets as $ticket){
+            $get_weight_by_priority += $ticket->get_weight_by_priority();
+        }
+        return $get_weight_by_priority;
+    }
 
 }

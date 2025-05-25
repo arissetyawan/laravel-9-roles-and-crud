@@ -10,23 +10,31 @@
             <div class="card">
             <div class="card-header fw-bold">{{ __('Statistik Kinerja Petugas') }}</div>
             <div class="card-body">
-                <table class="table table-hover table-responsive">
+                <table class="table table-hover table-bordered table-responsive">
                     <thead>
                     <tr>
                         <th scope="col" class="col-1">#</th>
                         <th scope="col" class="col">Petugas</th>
-                        <th scope="col" class="col">Tiket</th>
-                        <th scope="col" class="text-center col">Min Rating</th>
-                        <th scope="col" class="text-center col">Max Rating</th>
-                        <th scope="col" class="col-3">Total Rating</th>
+                        <th scope="col" colspan="2" style="vertical-align: top;"class="text-center col">Tiket</th>
+                        <th scope="col" colspan="3" style="vertical-align: top;"class="text-center col">Rating</th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="col-1"></th>
+                        <th scope="col" class="col"></th>
+                        <th scope="col" class="col text-center ">Total</th>
+                        <th scope="col" class="col text-center ">Bobot</th>
+                        <th scope="col" class="text-center col">Min</th>
+                        <th scope="col" class="text-center col">Max</th>
+                        <th scope="col" class="col text-center">Total</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($users as $user)
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
-                            <td>{{ $user['name'] }}</td>
-                            <td>{{ $user['ticket'] }}</td>
+                            <td><a href="/ticket?assigned_id={{$user['id']}}'">{{ $user['name'] }}</td>
+                            <td class="text-center ">{{ $user['ticket'] }}</td>
+                            <td class="text-center ">{{ $user['bobot'] }}</td>
                             <td class="text-center">{{ $user['min_rating'] }}</td>
                             <td class="text-center">{{ $user['max_rating'] }}</td>
                             <td>{{ $user['rating'] }}  ({{ $user['rating_percentage'] }}%)</td>
