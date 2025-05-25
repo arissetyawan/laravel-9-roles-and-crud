@@ -118,7 +118,7 @@
                 <tfooter>
                     <tr>
                       <td>
-                        <label for="description">Komentar Pelapor</label>
+                        <label for="description">Komentar Pelapor <small>{{$ticket->rating_at}}</small></label>
                       </td>
                     </tr>
                     <tr>

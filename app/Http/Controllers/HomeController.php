@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
 use App\Models\Ticket;
 use App\Models\Status;
+use Illuminate\Support\Arr;
 
 class HomeController extends Controller
 {
@@ -44,7 +45,7 @@ class HomeController extends Controller
             $users->push(['id'=>$user->id, 'bobot' => $user->get_total_weight(), 'ticket' => $user->get_ticket(), 'rating' => $user->get_rating(), 'name' => $user->name, 'min_rating' => $user->get_min_rating(), 'max_rating'=>$user->get_max_rating(), 'rating_percentage' => round((($user->get_rating()/$total)*100), 2)]);
         }
         $users = $users->sortByDesc('rating');
-        $tickets_assigned_raw = Ticket::where('assigned_id','=', Auth::user()->id)->orderBy("updated_at", 'desc');
+        $tickets_assigned_raw = Ticket::where('assigned_id','=', Auth::user()->id)->orderBy("created_at", 'desc');
         $counter_assigned = $tickets_assigned_raw->get()->count();
         $tickets_assigned = $tickets_assigned_raw->paginate(3,['*'],'page_l');
 
@@ -52,16 +53,27 @@ class HomeController extends Controller
         $counter_reported = $tickets_reported_raw->get()->count();
         $tickets_reported = $tickets_reported_raw->paginate(3,['*'],'page_r');
 
-        $ticket_tugas = Ticket::where('assigned_id', Auth::user()->id)->where('status_id', Status::id_sedang_dikerjakan())->count();
+        $ticket_tugas = Ticket::where('assigned_id', Auth::user()->id)->where('status_id', Status::id_sedang_dikerjakan());
 
         if(Auth::user()->role->name=='pelapor'){
-            $ticket_feedback = Ticket::where('reporter_id', Auth::user()->id)->where('status_id', Status::id_selesai())->where('rating_at', null)->count();
-            if($ticket_feedback>0){
-                toast('Terdapat '. $ticket_feedback .' tiket selesai dikerjakan. Mohon cek bagian tabel "Tiket Laporan" untuk memberikan umpan balik terbaik ya !','success');
+            $ticket_feedback = Ticket::where('reporter_id', Auth::user()->id)->where('status_id', Status::id_selesai())->where('rating_at', null);
+
+            if($ticket_feedback->count()>0){
+                $no = array();
+                foreach($ticket_feedback->get() as $ticket){
+                    array_push($no,$ticket->get_code());
+                }
+                $no = Arr::join($no, ', ', ' dan ');
+                toast('Terdapat '. $ticket_feedback->count() .' tiket selesai dikerjakan: '. $no.' Mohon cek bagian tabel "Tiket Laporan" untuk memberikan umpan balik terbaik ya !','success');
             }
         }else{
-            if($ticket_tugas>0){
-                toast('Terdapat '. $ticket_tugas .' tiket untuk dikerjakan. Mohon cek bagian tabel "Tiket Tugas". Klik selesai jika tiket telah dikerjakan untuk mendapatkan umpan balik dari pelapor !','success');
+            if($ticket_tugas->count()>0){
+                $no = array();
+                foreach($ticket_tugas->get() as $ticket){
+                    array_push($no,$ticket->get_code());
+                }
+                $no = Arr::join($no, ', ', ' dan ');
+                toast('Terdapat '. $ticket_tugas->count() .' tiket untuk dikerjakan: '. $no.' Mohon cek bagian tabel "Tiket Tugas". Klik selesai jika tiket telah dikerjakan untuk mendapatkan umpan balik dari pelapor !','success');
             }
         }
 
