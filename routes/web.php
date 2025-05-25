@@ -143,7 +143,11 @@ Route::middleware('auth')->controller(DocumentController::class)->prefix("docume
     Route::get('/destroy/{id}', 'destroy')->name('document/destroy')->where('id','[0-9]+');
 });
 
-Auth::routes();
+Auth::routes([
+    'reset' => false, // Disable password reset routes
+    'verify'  => false,
+    'register' => false
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
