@@ -126,6 +126,7 @@ class TicketController extends Controller
             $request['status_id'] = Status::id_ditolak();
         }
         elseif($request['btn']=='Terima kasih!'){
+            $request['rating_at']= Carbon::now();
             $message = 'Terima kasih ! Umpan balik anda berhasil dikirimkan!';
         }
         $request['circle_counter'] = $ticket->circle_counter+1;

@@ -55,8 +55,7 @@ class HomeController extends Controller
         $ticket_tugas = Ticket::where('assigned_id', Auth::user()->id)->where('status_id', Status::id_sedang_dikerjakan())->count();
 
         if(Auth::user()->role->name=='pelapor'){
-            $ticket_feedback = Ticket::where('reporter_id', Auth::user()->id)->where('status_id', Status::id_selesai())->count();
-            //->where('rating_at', null)
+            $ticket_feedback = Ticket::where('reporter_id', Auth::user()->id)->where('status_id', Status::id_selesai())->where('rating_at', null)->count();
             if($ticket_feedback>0){
                 toast('Terdapat '. $ticket_feedback .' tiket selesai dikerjakan. Mohon cek bagian tabel "Tiket Laporan" untuk memberikan umpan balik terbaik ya !','success');
             }
