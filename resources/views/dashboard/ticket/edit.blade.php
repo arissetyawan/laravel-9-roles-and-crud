@@ -166,7 +166,7 @@
             @foreach($documents as $file)
               <tr>
                 <td width="3%">{{ $loop->index+1 }}</td>
-                <td><a target="_NEW" href='{{$file->get_url($host)}}'><img style="float:left" src="{{$file->get_url(null)}}" style="{{ $file->thumbnail()}}" >&nbsp;{{ $file->name }}</a> oleh {{$file->get_user_name()}}</td>
+                <td><a target="_NEW" href='{{$file->get_url($host)}}'><img src="{{$file->get_url(null)}}" style="float: left; {{ $file->thumbnail()}}" >&nbsp;{{ $file->name }}</a> oleh {{$file->get_user_name()}}</td>
                 <td width="10%">{{ $file->size }}</td>
                 <td width="10%">{{ $file->type }}</td>
                 <td>{{ $file->created_at }}</td>

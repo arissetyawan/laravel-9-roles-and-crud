@@ -26,7 +26,7 @@ class Document extends Model
     }
     public function thumbnail()
     {
-        return "height: 40x; width: 40px";
+        return "height: 40px; width: 40px";
     }
     public function get_user_name()
     {
