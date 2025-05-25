@@ -40,9 +40,25 @@ class HomeController extends Controller
         $role = Role::whereName('petugas')->first();
         $users_found = $role->users()->get();
         $users = collect();
-        $total = Ticket::where('status_id', Status::id_selesai())->sum('rating');
+        $all = Ticket::where('status_id', Status::id_selesai());
+        $rating = $all->sum('rating');
+        $weight = 0;
+        foreach($all->get() as $ticket){
+            $weight += $ticket->get_weight_by_priority();
+        }
+
+        $n = $all->count();
         foreach ($users_found as $user) {
-            $users->push(['id'=>$user->id, 'bobot' => $user->get_total_weight(), 'ticket' => $user->get_ticket(), 'rating' => $user->get_rating(), 'name' => $user->name, 'min_rating' => $user->get_min_rating(), 'max_rating'=>$user->get_max_rating(), 'rating_percentage' => round((($user->get_rating()/$total)*100), 2)]);
+            $users->push(['id'=>$user->id,
+                'bobot' => $user->get_total_weight(),
+                'ticket' => $user->get_ticket(),
+                'rating' => $user->get_rating(),
+                'name' => $user->name,
+                'min_rating' => $user->get_min_rating(),
+                'max_rating'=>$user->get_max_rating(),
+                'rating_percentage' => round((($user->get_rating()/$rating)*100), 2),
+                'bobot_percentage' => round((($user->get_total_weight()/$weight)*100), 2),
+                'n_percentage' => round((($user->get_finished_tickets()->count()/$n)*100), 2)]);
         }
         $users = $users->sortByDesc('rating');
         $tickets_assigned_raw = Ticket::where('assigned_id','=', Auth::user()->id)->orderBy("created_at", 'desc');

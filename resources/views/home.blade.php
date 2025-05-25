@@ -33,11 +33,11 @@
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
                             <td><a href="/ticket?assigned_id={{$user['id']}}'">{{ $user['name'] }}</td>
-                            <td class="text-center ">{{ $user['ticket'] }}</td>
-                            <td class="text-center ">{{ $user['bobot'] }}</td>
+                            <td class="text-center ">{{ $user['ticket'] }}({{$user['n_percentage']}}%)</td>
+                            <td class="text-center ">{{ $user['bobot'] }} ({{$user['bobot_percentage']}}%)</td>
                             <td class="text-center">{{ $user['min_rating'] }}</td>
                             <td class="text-center">{{ $user['max_rating'] }}</td>
-                            <td>{{ $user['rating'] }}  ({{ $user['rating_percentage'] }}%)</td>
+                            <td>{{ $user['rating'] }}({{ $user['rating_percentage'] }}%)</td>
                         </tr>
                         @endforeach
                     </tbody>

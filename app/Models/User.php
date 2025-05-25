@@ -64,6 +64,11 @@ class User extends Authenticatable
     {
         return Ticket::where('assigned_id', '=', $this->id)->count();
     }
+
+    public function get_finished_tickets()
+    {
+        return Ticket::where('assigned_id', '=', $this->id)->where('status_id', '=', Status::id_selesai());
+    }
     public function get_min_rating()
     {
         $tickets= Ticket::where('assigned_id', '=', $this->id)->where('status_id', '=', Status::id_selesai())->orderBy('rating')->first();
