@@ -118,7 +118,7 @@
                 <tfooter>
                     <tr>
                       <td>
-                        <label for="description">Komentar Penyelesaian</label>
+                        <label for="description">Komentar Pelapor</label>
                       </td>
                     </tr>
                     <tr>
@@ -147,7 +147,7 @@
         <input name='btn' type="submit" class="btn btn-danger" value="Tolak" id='btn-tolak'>
     </form>
 
-     @if((Auth::user()->role->name=='pelapor' || Auth::user()->role->name=='admin') && $ticket->reporter_id==Auth::user()->id)
+     @if(!$ticket->is_ditolak() && ($ticket->reporter_id==Auth::user()->id || $ticket->assigned_id==Auth::user()->id))
      <div class="form-group">
       <div class="bg-light p-5 rounded">
         <b>Sertakan Berkas Dokumen (Jika Perlu)</b>
@@ -159,14 +159,14 @@
               <th scope="col">Size</th>
               <th scope="col">Type</th>
               <th scope="col">Waktu</th>
-              <th scope="col">Action</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             @foreach($documents as $file)
               <tr>
                 <td width="3%">{{ $loop->index+1 }}</td>
-                <td><a target="_NEW" href='{{$file->get_url($host)}}'><img src="{{$file->get_url(null)}}" style="{{ $file->thumbnail()}}" >{{ $file->name }}</a></td>
+                <td><a target="_NEW" href='{{$file->get_url($host)}}'><img style="float:left" src="{{$file->get_url(null)}}" style="{{ $file->thumbnail()}}" >&nbsp;{{ $file->name }}</a> oleh {{$file->get_user_name()}}</td>
                 <td width="10%">{{ $file->size }}</td>
                 <td width="10%">{{ $file->type }}</td>
                 <td>{{ $file->created_at }}</td>

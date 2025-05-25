@@ -51,6 +51,7 @@
 
     <div class="row justify-content-center">
 
+        @if(Auth::user()->role->name=='petugas')
         <div class="col-md-6">
             <div class="card">
 
@@ -105,10 +106,9 @@
                     <hr />
                 </div>
 
-
             </div>
         </div>
-
+        @endif
 
         <div class="col-md-6">
             <div class="card">

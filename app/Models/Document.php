@@ -28,5 +28,10 @@ class Document extends Model
     {
         return "height: 40x; width: 40px";
     }
+    public function get_user_name()
+    {
+        return User::find($this->user_id)->name;
+    }
+
 
 }
