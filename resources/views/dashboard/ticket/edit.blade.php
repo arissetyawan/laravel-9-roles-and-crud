@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-    <div class="card-header" ><b>Formulir {{ __('Tiket') }}: {{$ticket->get_code()}}&nbsp;<sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></div>
+    <div class="card-header" ><b>{{ __('Tiket') }}: {{$ticket->get_code()}}&nbsp;<sup style="padding: 2px;background-color: yellow">{{ $ticket->get_status_name() }}</b></sup></b></div>
     <div class="card-body">
 
     @if ($errors->any()) 
@@ -21,7 +21,7 @@
         <input type="hidden" name="id" value="{{ $ticket->id }}">
         <div class="form-group">
           <label for="name">Deskripsi</label>
-          <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" maxlength="255" rows="3">{{ $ticket->description }}</textarea>
+          <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" maxlength="255" rows="3" {{(Auth::user()->role->name=='petugas' && $ticket->reporter_id!=$ticket->assigned_id) ? 'readonly=true' : 'false' }}" >{{ $ticket->description }}</textarea>
           @error('description')
           <x-alert type="invalid-feedback" :message="$message" class="mt-4"/>
           @enderror

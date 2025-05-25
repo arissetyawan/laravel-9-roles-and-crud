@@ -53,9 +53,19 @@ class HomeController extends Controller
         $tickets_reported = $tickets_reported_raw->paginate(3,['*'],'page_r');
 
         $ticket_tugas = Ticket::where('assigned_id', Auth::user()->id)->where('status_id', Status::id_sedang_dikerjakan())->count();
-        if($ticket_tugas>0){
-            toast('Terdapat '. $ticket_tugas .' tiket untuk dikerjakan. Mohon cek bagian tabel "Tiket Tugas". Klik selesai jika tiket telah dikerjakan untuk mendapatkan umpan balik dari pelapor !','success');
+
+        if(Auth::user()->role->name=='pelapor'){
+            $ticket_feedback = Ticket::where('reporter_id', Auth::user()->id)->where('status_id', Status::id_selesai())->count();
+            //->where('rating_at', null)
+            if($ticket_feedback>0){
+                toast('Terdapat '. $ticket_feedback .' tiket selesai dikerjakan. Mohon cek bagian tabel "Tiket Laporan" untuk memberikan umpan balik terbaik ya !','success');
+            }
+        }else{
+            if($ticket_tugas>0){
+                toast('Terdapat '. $ticket_tugas .' tiket untuk dikerjakan. Mohon cek bagian tabel "Tiket Tugas". Klik selesai jika tiket telah dikerjakan untuk mendapatkan umpan balik dari pelapor !','success');
+            }
         }
+
         return view('home',compact('tickets_assigned', 'tickets_reported','counter_assigned','counter_reported','users','ticket_tugas'));
     }
 }

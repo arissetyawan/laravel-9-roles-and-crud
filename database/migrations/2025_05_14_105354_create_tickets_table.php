@@ -26,6 +26,7 @@ return new class extends Migration
             $table->dateTime('last_status_at', precision: 0)->default(now());
             $table->integer('rating')->default(0);
             $table->string('rating_comment')->nullable();
+            $table->dateTime('rating_at', precision: 0)->nullable();
             $table->integer('circle_counter')->default(0);
             $table->timestamps();
         });
